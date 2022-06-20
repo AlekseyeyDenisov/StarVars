@@ -1,4 +1,4 @@
-package ru.dw.domain
+package ru.dw.starvars.domain.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,7 +23,7 @@ data class ResultsItem(
 	val films: List<String?>? = null,
 
 	@field:SerializedName("homeworld")
-	val homeworld: String? = null,
+	val homeWorld: String? = null,
 
 	@field:SerializedName("gender")
 	val gender: String? = null,

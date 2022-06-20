@@ -1,14 +1,6 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.domain.model
 
-import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
-@Entity(tableName = "peoples")
-data class PeoplesEntity(
-    @PrimaryKey(autoGenerate = true)
+data class PeoplesItemView(
     val films: List<String?>? = null,
     val homeWorld: String? = null,
     val gender: String? = null,
@@ -24,6 +16,14 @@ data class PeoplesEntity(
     val species: List<Any?>? = null,
     val starships: List<String?>? = null,
     val name: String? = null,
-    val height: String? = null
+    val height: String? = null,
+    var viewTape: Int = VIEW_TAPE_CHARACTER,
+    val nextPage:String? = null
 
-):Parcelable
+)
+{
+    companion object {
+        const val VIEW_TAPE_CHARACTER = 1
+        const val VIEW_TAPE_LOAD_MORE = 0
+    }
+}
