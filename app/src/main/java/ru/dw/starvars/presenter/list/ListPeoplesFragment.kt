@@ -8,10 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
+import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.presenter.list.recycler.AdapterRecyclerListPeoples
+import ru.dw.starvars.presenter.list.recycler.OnItemClickListener
 import ru.dw.utils.START_PEOPLES_LIST_URL
+import kotlin.math.log
 
-class ListPeoplesFragment : Fragment() {
+class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
     companion object {
         fun newInstance() = ListPeoplesFragment()
@@ -23,6 +28,8 @@ class ListPeoplesFragment : Fragment() {
     private val viewModel: ListPeoplesViewModel by lazy {
         ViewModelProvider(this)[ListPeoplesViewModel::class.java]
     }
+
+    private val adapterRecyclerListPeoples = AdapterRecyclerListPeoples(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +43,14 @@ class ListPeoplesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestStart()
         initObserve()
+        initRecycler(binding.listPeopleRecyclerView)
 
+    }
+
+    private fun initRecycler(listPeopleRecyclerView: RecyclerView) {
+        with(listPeopleRecyclerView){
+            adapter = adapterRecyclerListPeoples
+        }
     }
 
     private fun requestStart() {
@@ -53,18 +67,25 @@ class ListPeoplesFragment : Fragment() {
 
         when (state) {
             is ListState.Loading -> {
-                Log.d("@@@", "renderData Loading: ")
+                visibilityProgress(true)
+
             }
             is ListState.Success -> {
-                state.peopleList.forEach {
-                    Log.d("@@@", "renderData Success: ${it.name}")
-                }
+                visibilityProgress(false)
+                adapterRecyclerListPeoples.submitList(state.peopleList)
 
             }
             is ListState.Error -> {
+                visibilityProgress(false)
                 Log.d("@@@", "renderData Error ${state.error}")
             }
         }
+
+    }
+
+    private fun visibilityProgress(visibility: Boolean) {
+        if (visibility)binding.showProgress.visibility = View.VISIBLE
+        else binding.showProgress.visibility = View.GONE
 
     }
 
@@ -72,6 +93,15 @@ class ListPeoplesFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemClick(peoplesItemView: PeoplesItemView) {
+        Log.d("@@@", "onItemClick name: " +peoplesItemView.name)
+
+    }
+
+    override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
+        Log.d("@@@", "onItemClick name: " +peoplesItemView.nextPage)
     }
 
 

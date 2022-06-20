@@ -1,5 +1,6 @@
 package ru.dw.starvars.presenter.list
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,13 +13,14 @@ class ListPeoplesViewModel : ViewModel() {
     private val repository = RepositoryIpl
     private val getPeoplesList = GetListPeoplesCase(repository)
 
+
     fun getLivedata(): LiveData<ListState> = liveData
 
     fun upDataListPeople(url: String) {
         liveData.value = ListState.Loading
         getPeoplesList.getListPeoples(url, object : ResponseCallBack {
             override fun success(listPeoplesItemView: List<PeoplesItemView>) {
-                liveData.value = ListState.Success(listPeoplesItemView)
+                liveData.postValue(ListState.Success(listPeoplesItemView))
             }
 
             override fun error(error: String) {
