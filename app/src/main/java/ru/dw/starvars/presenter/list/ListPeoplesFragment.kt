@@ -1,6 +1,7 @@
 package ru.dw.starvars.presenter.list
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -63,6 +64,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun renderData(state: ListState) {
 
         when (state) {
@@ -73,11 +75,10 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             is ListState.Success -> {
                 visibilityProgress(false)
                 adapterRecyclerListPeoples.submitList(state.peopleList)
-
+                adapterRecyclerListPeoples.notifyDataSetChanged()
             }
             is ListState.Error -> {
                 visibilityProgress(false)
-                Log.d("@@@", "renderData Error ${state.error}")
             }
         }
 
@@ -101,7 +102,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
-        Log.d("@@@", "onItemClick name: " +peoplesItemView.nextPage)
+        peoplesItemView.nextPage?.let { viewModel.upDataListPeople(it) }
     }
 
 

@@ -3,12 +3,15 @@ package ru.dw.starvars.presenter.list.recycler
 import androidx.recyclerview.widget.DiffUtil
 import ru.dw.starvars.domain.model.PeoplesItemView
 
-class RecyclerDiffUtilCallBack:DiffUtil.ItemCallback<PeoplesItemView>() {
-    override fun areItemsTheSame(entities: PeoplesItemView, newEntities: PeoplesItemView): Boolean {
-        return entities.name == newEntities.name
+class RecyclerDiffUtilCallBack : DiffUtil.ItemCallback<PeoplesItemView>() {
+    override fun areItemsTheSame(oldItem: PeoplesItemView, newItem: PeoplesItemView): Boolean {
+        return oldItem.homeWorld == newItem.homeWorld
     }
 
-    override fun areContentsTheSame(oldEntities: PeoplesItemView, newEntities: PeoplesItemView): Boolean {
-        return oldEntities == newEntities
+    override fun areContentsTheSame(
+        oldItem: PeoplesItemView,
+        newItem: PeoplesItemView
+    ): Boolean {
+        return oldItem == newItem
     }
 }
