@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import kotlinx.android.synthetic.main.item_recycler.view.*
 import ru.dw.starvars.databinding.ItemLoadMoreRecyclerBinding
 import ru.dw.starvars.databinding.ItemRecyclerBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
@@ -46,20 +45,20 @@ class AdapterRecyclerListPeoples(
         else holder.binLoadMore(item)
     }
 
-    inner class ViewHolderPeopleItem(private val viewBinding: ViewBinding) :
+    inner class ViewHolderPeopleItem(viewBinding: ViewBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
         fun bindPeople(peoplesItemView: PeoplesItemView) {
-            viewBinding.root.apply {
+            ItemRecyclerBinding.bind(itemView).apply {
                 nameCharacter.text = peoplesItemView.name
-                setOnClickListener {
+                root.setOnClickListener {
                     onItemClickListener.onItemClick(peoplesItemView)
                 }
             }
         }
 
         fun binLoadMore(peoplesItemView: PeoplesItemView) {
-            viewBinding.root.apply {
+            ItemLoadMoreRecyclerBinding.bind(itemView).root.apply {
                 setOnClickListener {
                     onItemClickListener.onItemClickLoadMore(peoplesItemView)
                 }

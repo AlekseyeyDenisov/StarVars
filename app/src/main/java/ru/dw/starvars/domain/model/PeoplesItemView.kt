@@ -9,7 +9,7 @@ data class PeoplesItemView(
     val created: String? = null,
     val mass: String? = null,
     val vehicles: List<String?>? = null,
-    val url: String? = null,
+    val url:  String? = null,
     val hairColor: String? = null,
     val birthYear: String? = null,
     val eyeColor: String? = null,

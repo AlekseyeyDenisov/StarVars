@@ -1,7 +1,6 @@
 package ru.dw.starvars.presenter.list
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +9,9 @@ import ru.dw.starvars.domain.cases.GetListPeoplesCase
 import ru.dw.starvars.domain.model.PeoplesItemView
 
 class ListPeoplesViewModel : ViewModel() {
+
+    //private val context: Context = getApplication()
+    //private val dbRoom = Room.databaseBuilder(context, DBRoom::class.java, "roomStarWars")
     private val liveData: MutableLiveData<ListState> = MutableLiveData()
     private val repository = RepositoryIpl
     private val getPeoplesList = GetListPeoplesCase(repository)
@@ -17,7 +19,7 @@ class ListPeoplesViewModel : ViewModel() {
 
     fun getLivedata(): LiveData<ListState> = liveData
 
-    fun upDataListPeople(url: String) {
+    fun updateListPeople(url: String) {
         liveData.value = ListState.Loading
         getPeoplesList.getListPeoples(url, object : ResponseCallBack {
             override fun success(listPeoplesItemView: List<PeoplesItemView>) {

@@ -1,7 +1,6 @@
 package ru.dw.starvars.presenter.list
 
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +13,7 @@ import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.presenter.list.recycler.AdapterRecyclerListPeoples
 import ru.dw.starvars.presenter.list.recycler.OnItemClickListener
-import ru.dw.utils.START_PEOPLES_LIST_URL
-import kotlin.math.log
+import ru.dw.starvars.utils.START_PEOPLES_LIST_URL
 
 class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
@@ -55,7 +53,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     private fun requestStart() {
-        viewModel.upDataListPeople(START_PEOPLES_LIST_URL)
+        viewModel.updateListPeople(START_PEOPLES_LIST_URL)
     }
 
     private fun initObserve() {
@@ -64,7 +62,6 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun renderData(state: ListState) {
 
         when (state) {
@@ -75,7 +72,10 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             is ListState.Success -> {
                 visibilityProgress(false)
                 adapterRecyclerListPeoples.submitList(state.peopleList)
-                adapterRecyclerListPeoples.notifyDataSetChanged()
+                {
+
+                    binding.listPeopleRecyclerView.scrollToPosition(state.peopleList.size)
+                }
             }
             is ListState.Error -> {
                 visibilityProgress(false)
@@ -97,12 +97,12 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(peoplesItemView: PeoplesItemView) {
-        Log.d("@@@", "onItemClick name: " +peoplesItemView.name)
+        Log.d("@@@", "onItemClick name: " +peoplesItemView)
 
     }
 
     override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
-        peoplesItemView.nextPage?.let { viewModel.upDataListPeople(it) }
+        peoplesItemView.nextPage?.let { viewModel.updateListPeople(it) }
     }
 
 
