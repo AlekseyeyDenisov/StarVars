@@ -1,4 +1,4 @@
-package ru.dw.starvars.presenter.list.recycler
+package ru.dw.starvars.view.list.recycler
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.dw.starvars.domain.model.PeoplesItemView

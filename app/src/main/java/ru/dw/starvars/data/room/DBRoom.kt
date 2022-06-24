@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase
         //VehiclesEntity::class,
         //SpeciesEntity::class,
        // StarshipsEntity::class
-    ], version = 1
+    ], version = 2
 )
 abstract class DBRoom : RoomDatabase() {
     abstract fun peoplesDao(): PeoplesDao

@@ -7,8 +7,6 @@ import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 
 
 interface RetrofitApi {
-
-
     @GET
     fun getUrlResponse(@Url url: String): Call<PeoplesListResponsePojo>
 }

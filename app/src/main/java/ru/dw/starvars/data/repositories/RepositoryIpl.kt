@@ -1,21 +1,36 @@
 package ru.dw.starvars.data.repositories
 
+import androidx.lifecycle.LiveData
 import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.presenter.list.ListPeoplesViewModel
-
-object RepositoryIpl : Repository {
-    private val dataApi:Repository = RetrofitApiStarWars
-    //private val dataRoom = MyApp.getDBRoom()
+import ru.dw.starvars.data.room.PeoplesEntity
+import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
+import ru.dw.starvars.viewmodel.list.Repository
 
 
-    override fun getPeoples(url: String, responseCallBack: ListPeoplesViewModel.ResponseCallBack) {
-        dataApi.getPeoples(url, object : ListPeoplesViewModel.ResponseCallBack {
-            override fun success(listPeoplesItemView: List<PeoplesItemView>) {
-                responseCallBack.success(listPeoplesItemView)
-                //dataRoom.insertUpdateDatabase(listPeoplesItemView)
+object RepositoryIpl : Repository, DataBaseLocal {
+    private val dataApi:ApiStarWarsRetrofit = RetrofitApiStarWars
+    private val dataRoom:DataBaseLocal = MyApp.getDBRoom()
 
+    override fun getAll(): LiveData<List<PeoplesEntity>> = dataRoom.getAll()
+
+    override fun insertUpdateDatabase(pogo: PeoplesListResponsePojo) {
+        dataRoom.insertUpdateDatabase(pogo)
+    }
+
+    override fun refresh() = dataRoom.refresh()
+
+
+    override fun getRequestUrl(
+        url: String,
+        responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel
+    ) {
+        dataApi.getRequestUrl(url, object : RetrofitApiStarWars.ResponseCallBackRetrofit {
+
+
+            override fun success(pogo: PeoplesListResponsePojo) {
+                insertUpdateDatabase(pogo)
             }
 
             override fun error(error: String) {
@@ -23,6 +38,5 @@ object RepositoryIpl : Repository {
             }
         })
     }
-
 
 }

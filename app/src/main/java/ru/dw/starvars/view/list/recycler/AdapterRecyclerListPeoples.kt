@@ -1,4 +1,4 @@
-package ru.dw.starvars.presenter.list.recycler
+package ru.dw.starvars.view.list.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import androidx.viewbinding.ViewBinding
 import ru.dw.starvars.databinding.ItemLoadMoreRecyclerBinding
 import ru.dw.starvars.databinding.ItemRecyclerBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.domain.model.PeoplesItemView.Companion.VIEW_TAPE_CHARACTER
-import ru.dw.starvars.domain.model.PeoplesItemView.Companion.VIEW_TAPE_LOAD_MORE
+import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
+import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
 
 class AdapterRecyclerListPeoples(
     private val onItemClickListener: OnItemClickListener

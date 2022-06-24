@@ -3,30 +3,29 @@ package ru.dw.starvars.data.room
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+import ru.dw.starvars.utils.CONSTANT_TABLE_PEOPLES
+import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
 
 @Parcelize
-@Entity(tableName = "peoples")
+@Entity(tableName = CONSTANT_TABLE_PEOPLES)
 data class PeoplesEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Long,
-    //val films: List<String?>? = null,
     val homeWorld: String? = null,
     val gender: String? = null,
     val skinColor: String? = null,
     val edited: String? = null,
     val created: String? = null,
     val mass: String? = null,
-    //val vehicles: List<String?>? = null,
-//    @PrimaryKey
     val url: String? = null,
     val hairColor: String? = null,
     val birthYear: String? = null,
     val eyeColor: String? = null,
-    //val species: List<Any?>? = null,
-    //val starships: List<String?>? = null,
-    val name: String? = null,
-    val height: String? = null
+    val name: String = "@@@",
+    val height: String? = null,
+    var viewTape: Int = VIEW_TAPE_CHARACTER,
+    val nextPage:String? = null
 ):Parcelable
 
 @Entity(tableName = "attributes")

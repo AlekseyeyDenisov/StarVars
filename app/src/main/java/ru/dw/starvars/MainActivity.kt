@@ -2,7 +2,7 @@ package ru.dw.starvars
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.dw.starvars.presenter.list.ListPeoplesFragment
+import ru.dw.starvars.view.list.ListPeoplesFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,4 +13,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, ListPeoplesFragment.newInstance()).commit()
         }
     }
+
+
 }

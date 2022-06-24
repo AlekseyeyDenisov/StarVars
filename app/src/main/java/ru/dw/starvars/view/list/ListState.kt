@@ -1,4 +1,4 @@
-package ru.dw.starvars.presenter.list
+package ru.dw.starvars.view.list
 
 import ru.dw.starvars.domain.model.PeoplesItemView
 

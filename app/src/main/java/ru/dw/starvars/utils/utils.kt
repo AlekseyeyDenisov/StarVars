@@ -1,8 +1,10 @@
 package ru.dw.starvars.utils
 
+
 import ru.dw.starvars.data.room.PeoplesEntity
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.domain.model.ResultsItem
+
 
 const val BASE_URL = "https://swapi.dev/api/"
 const val START_PEOPLES_LIST_URL = "https://swapi.dev/api/people/"
@@ -10,31 +12,10 @@ const val CONSTANT_ATTRIBUTE_FILMS = "films"
 const val CONSTANT_ATTRIBUTE_VEHICLES = "vehicles"
 const val CONSTANT_ATTRIBUTE_STARSHIPS = "starships"
 const val CONSTANT_ATTRIBUTE_SPECIES = "species"
+const val CONSTANT_TABLE_PEOPLES = "peoples"
+const val VIEW_TAPE_CHARACTER = 1
+const val VIEW_TAPE_LOAD_MORE = 0
 
-fun mapperPeoplesListPojoToPeoplesItemView(
-    resultsItemPojo: ResultsItem
-): PeoplesItemView {
-    resultsItemPojo.also { pojo ->
-        return PeoplesItemView(
-            pojo.films,
-            pojo.homeWorld,
-            pojo.gender,
-            pojo.skinColor,
-            pojo.edited,
-            pojo.created,
-            pojo.mass,
-            pojo.vehicles,
-            pojo.url,
-            pojo.hairColor,
-            pojo.birthYear,
-            pojo.eyeColor,
-            pojo.species,
-            pojo.starships,
-            pojo.name,
-            pojo.height
-        )
-    }
-}
 
 fun mapperItemViewToPeoplesEntity(peoplesItemView: PeoplesItemView): PeoplesEntity {
     return PeoplesEntity(
@@ -49,7 +30,48 @@ fun mapperItemViewToPeoplesEntity(peoplesItemView: PeoplesItemView): PeoplesEnti
         hairColor = peoplesItemView.hairColor,
         eyeColor = peoplesItemView.eyeColor,
         name = peoplesItemView.name,
-        height = peoplesItemView.height
+        height = peoplesItemView.height,
+        viewTape = peoplesItemView.viewTape
     )
 
 }
+fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeoplesEntity): PeoplesItemView {
+    return PeoplesItemView(
+        peoplesEntity.homeWorld,
+        peoplesEntity.gender,
+        peoplesEntity.skinColor,
+        peoplesEntity.edited,
+        peoplesEntity.created,
+        peoplesEntity.mass,
+        peoplesEntity.url,
+        peoplesEntity.hairColor,
+        peoplesEntity.birthYear,
+        peoplesEntity.eyeColor,
+        peoplesEntity.name,
+        peoplesEntity.height,
+        peoplesEntity.viewTape,
+        peoplesEntity.nextPage
+    )
+}
+
+fun convertPogoToEntity(resultsItem: ResultsItem): PeoplesEntity {
+    return PeoplesEntity(
+        0,
+        resultsItem.homeWorld,
+        resultsItem.gender,
+        resultsItem.skinColor,
+        resultsItem.edited,
+        resultsItem.created,
+        resultsItem.mass,
+        resultsItem.url,
+        resultsItem.hairColor,
+        resultsItem.birthYear,
+        resultsItem.eyeColor,
+        resultsItem.name,
+        resultsItem.height,
+        VIEW_TAPE_CHARACTER
+    )
+
+}
+
+

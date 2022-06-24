@@ -2,48 +2,52 @@ package ru.dw.starvars.data.room
 
 
 import androidx.lifecycle.LiveData
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.data.repositories.DataBaseLocal
+import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.domain.model.ResultsItem
 import ru.dw.starvars.utils.*
 
+
 class HelperRoomPeople(
-    private val peoplesDao:PeoplesDao,
+    private val peoplesDao: PeoplesDao,
     private val attributesDao: AttributesDao
-) {
+) : DataBaseLocal {
 
-    private fun update(peoplesEntity: PeoplesEntity) = peoplesDao.update(peoplesEntity)
+    override fun refresh() {
+        peoplesDao.deleteAll()
+        attributesDao.deleteAllAttr()
 
-    private fun getPeople(name:String):PeoplesEntity = peoplesDao.gelItem(name)
+    }
 
-    fun getAllPeoples(): List<PeoplesEntity> = peoplesDao.gelAll()
-
-    private fun insertPeople(peoplesEntity: PeoplesEntity) = peoplesDao.insert(peoplesEntity)
-
-    private fun  insertAttr(attributesEntity: AttributesEntity) = attributesDao.insert(attributesEntity)
-
-    private fun deleteAttr(idPeoples: Long) = attributesDao.deleteAttr(idPeoples)
+    override fun getAll(): LiveData<List<PeoplesEntity>> = peoplesDao.gelAll()
 
 
-     fun insertUpdateDatabase(listPeoplesItemView: List<PeoplesItemView>) {
+    override fun insertUpdateDatabase(pogo: PeoplesListResponsePojo) {
         Thread {
-            listPeoplesItemView.forEach { item ->
-                if (item.viewTape == PeoplesItemView.VIEW_TAPE_CHARACTER) {
-                    val isHave = item.name?.let { getPeople(it) }
-                    if (isHave != null) {
-                        update(mapperItemViewToPeoplesEntity(item)).toLong()
-                        deleteAttr(isHave.id)
-                        insertAttr(isHave.id, item)
-                    } else {
-                        //val idPeoples = insertPeople(mapperItemViewToPeoplesEntity(item))
-                       // insertAttr(idPeoples, item)
-                    }
+            peoplesDao.deleteNextPage(VIEW_TAPE_LOAD_MORE)
+
+            pogo.results?.forEach { item ->
+                if (item != null) {
+                    insertItem(item)
                 }
-
             }
-
+            if (pogo.next?.isNotEmpty() == true) {
+                peoplesDao.insert(crateLoadMore(pogo))
+            }
         }.start()
     }
 
-    private fun insertAttr(idPeoples: Long, item: PeoplesItemView) {
+    private fun crateLoadMore(pogo: PeoplesListResponsePojo): PeoplesEntity {
+        return PeoplesEntity(0, viewTape = VIEW_TAPE_LOAD_MORE, nextPage = pogo.next)
+    }
+
+
+    private fun insertItem(item: ResultsItem) {
+        val idPeoples: Long = peoplesDao.insert(convertPogoToEntity(item))
+        insertAttr(idPeoples, item)
+    }
+
+    private fun insertAttr(idPeoples: Long, item: ResultsItem) {
         insertAttrDB(item.films as List<String>, idPeoples, CONSTANT_ATTRIBUTE_FILMS)
 
         insertAttrDB(item.species as List<String>, idPeoples, CONSTANT_ATTRIBUTE_SPECIES)
@@ -58,10 +62,9 @@ class HelperRoomPeople(
         if (list.isNotEmpty()) {
             list.forEach { url ->
                 val attributesEntity = AttributesEntity(0, idPeoples, constantAttr, url)
-                insertAttr(attributesEntity)
+                attributesDao.insert(attributesEntity)
             }
         }
     }
-
 
 }
