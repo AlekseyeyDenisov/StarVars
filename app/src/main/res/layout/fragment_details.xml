@@ -1,13 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
+    android:orientation="vertical"
     tools:context=".view.details.DetailsFragment">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nameCharacter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        tools:text="Luke Skywalker" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/heightLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/height" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/height"
+            style="@style/DescriptionTextView"
+            tools:text="172" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/massLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/mass" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mass"
+            style="@style/DescriptionTextView"
+            tools:text="77" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/hairColorLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/hair_color" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/hairColor"
+            style="@style/DescriptionTextView"
+            tools:text="blond" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/skinColorLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/skin_color" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/skinColor"
+            style="@style/DescriptionTextView"
+            tools:text="fair" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/eyeColorLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/eye_color" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/eyeColor"
+            style="@style/DescriptionTextView"
+            tools:text="blue" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/birthYearLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/birth_year" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/birthYear"
+            style="@style/DescriptionTextView"
+            tools:text="19BBY" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/genderLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/gender" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/gender"
+            style="@style/DescriptionTextView"
+            tools:text="male" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
