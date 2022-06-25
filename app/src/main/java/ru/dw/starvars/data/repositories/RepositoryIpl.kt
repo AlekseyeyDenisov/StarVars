@@ -2,6 +2,8 @@ package ru.dw.starvars.data.repositories
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.MyApp
+import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
+import ru.dw.starvars.data.repositories.list.DataBaseLocal
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.room.PeoplesEntity
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
@@ -10,7 +12,7 @@ import ru.dw.starvars.viewmodel.list.Repository
 
 
 object RepositoryIpl : Repository, DataBaseLocal {
-    private val dataApi:ApiStarWarsRetrofit = RetrofitApiStarWars
+    private val dataApi: ApiRetrofitListInterface = RetrofitApiStarWars
     private val dataRoom:DataBaseLocal = MyApp.getDBRoom()
 
     override fun getAll(): LiveData<List<PeoplesEntity>> = dataRoom.getAll()
@@ -26,7 +28,7 @@ object RepositoryIpl : Repository, DataBaseLocal {
         url: String,
         responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel
     ) {
-        dataApi.getRequestUrl(url, object : RetrofitApiStarWars.ResponseCallBackRetrofit {
+        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.ResponseListCallBackRetrofit {
 
 
             override fun success(pogo: PeoplesListResponsePojo) {

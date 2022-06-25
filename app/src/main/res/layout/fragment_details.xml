@@ -135,6 +135,21 @@
             tools:text="male" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleTextView"
+            android:text="@string/home_world" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/homeWorld"
+            style="@style/DescriptionTextView"
+            tools:text="Home world" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

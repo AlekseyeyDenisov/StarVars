@@ -7,27 +7,31 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.dw.starvars.data.repositories.ApiStarWarsRetrofit
+import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
+import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.utils.BASE_URL
 
 
+object RetrofitApiStarWars : ApiRetrofitListInterface {
+    private val retrofit: RetrofitApi = initRetrofit()
+    private val callBackUrl = CallBackUrl<PlanetsPojo>()
 
-object RetrofitApiStarWars : ApiStarWarsRetrofit {
-    private val retrofit: Retrofit = initRetrofit()
-
-    private fun initRetrofit(): Retrofit {
+    private fun initRetrofit(): RetrofitApi {
         return Retrofit.Builder().apply {
             baseUrl(BASE_URL)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         }.build()
+            .create(RetrofitApi::class.java)
     }
 
 
-    override fun getRequestUrl(url: String, responseCallBackRetrofit: ResponseCallBackRetrofit) {
+    override fun getListRequestUrl(
+        url: String,
+        responseListCallBackRetrofit: ResponseListCallBackRetrofit
+    ) {
         retrofit
-            .create(RetrofitApi::class.java)
-            .getUrlResponse(url)
+            .getUrlPeoplesResponse(url)
             .enqueue(
                 object : Callback<PeoplesListResponsePojo> {
                     override fun onResponse(
@@ -37,18 +41,18 @@ object RetrofitApiStarWars : ApiStarWarsRetrofit {
                         if (response.isSuccessful) {
                             response.body()
                                 ?.let { pogo ->
-                                    responseCallBackRetrofit.success(pogo)
+                                    responseListCallBackRetrofit.success(pogo)
                                 }
 
                         } else {
-                            responseCallBackRetrofit.error(response.message())
+                            responseListCallBackRetrofit.error(response.message())
                             //responseCallBackViewModel.error("Что-то пошло не так")
 
                         }
                     }
 
                     override fun onFailure(call: Call<PeoplesListResponsePojo>, t: Throwable) {
-                        t.message?.let { responseCallBackRetrofit.error(it) }
+                        t.message?.let { responseListCallBackRetrofit.error(it) }
 
                     }
 
@@ -56,11 +60,26 @@ object RetrofitApiStarWars : ApiStarWarsRetrofit {
             )
     }
 
+    fun getPlanetRequestUrl(
+        url: String,
+        responseBackRetrofit: GenericCallBackRetrofit<PlanetsPojo>
+    ) {
+        retrofit
+            .getUrlPlanetResponse(url)
+            .enqueue(
+                callBackUrl.callback(responseBackRetrofit)
+            )
+    }
 
-    interface ResponseCallBackRetrofit {
+
+    interface ResponseListCallBackRetrofit {
         fun success(pogo: PeoplesListResponsePojo)
         fun error(error: String)
     }
 
+    interface GenericCallBackRetrofit<T> {
+        fun success(pogo: T)
+        fun error(error: String)
+    }
 
 }

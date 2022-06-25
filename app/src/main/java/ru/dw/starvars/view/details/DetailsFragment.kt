@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
+import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
 
@@ -44,6 +46,18 @@ class DetailsFragment : Fragment() {
         peoplesItemView?.eyeColor?.let { binding.eyeColor.text = it }
         peoplesItemView?.birthYear?.let { binding.birthYear.text = it }
         peoplesItemView?.gender?.let { binding.gender.text = it }
+
+        peoplesItemView?.homeWorld?.let { RetrofitApiStarWars.getPlanetRequestUrl(it,object:
+            RetrofitApiStarWars.GenericCallBackRetrofit<PlanetsPojo>{
+            override fun success(pogo: PlanetsPojo) {
+                binding.homeWorld.text = pogo.name
+            }
+
+            override fun error(error: String) {
+                TODO("Not yet implemented")
+            }
+
+        }) }
 
     }
 

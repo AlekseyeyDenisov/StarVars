@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.repositories
+package ru.dw.starvars.data.repositories.list
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.data.room.PeoplesEntity
