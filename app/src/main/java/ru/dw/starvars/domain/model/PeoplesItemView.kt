@@ -6,6 +6,7 @@ import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
 
 @Parcelize
 data class PeoplesItemView(
+    val id:Long,
     val homeWorld: String? = null,
     val gender: String? = null,
     val skinColor: String? = null,

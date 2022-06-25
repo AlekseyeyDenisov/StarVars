@@ -17,26 +17,9 @@ const val VIEW_TAPE_CHARACTER = 1
 const val VIEW_TAPE_LOAD_MORE = 0
 
 
-fun mapperItemViewToPeoplesEntity(peoplesItemView: PeoplesItemView): PeoplesEntity {
-    return PeoplesEntity(
-        id = 0,
-        homeWorld = peoplesItemView.homeWorld,
-        gender = peoplesItemView.gender,
-        skinColor = peoplesItemView.skinColor,
-        edited = peoplesItemView.edited,
-        created = peoplesItemView.created,
-        mass = peoplesItemView.mass,
-        url = peoplesItemView.url,
-        hairColor = peoplesItemView.hairColor,
-        eyeColor = peoplesItemView.eyeColor,
-        name = peoplesItemView.name,
-        height = peoplesItemView.height,
-        viewTape = peoplesItemView.viewTape
-    )
-
-}
 fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeoplesEntity): PeoplesItemView {
     return PeoplesItemView(
+        peoplesEntity.id,
         peoplesEntity.homeWorld,
         peoplesEntity.gender,
         peoplesEntity.skinColor,
