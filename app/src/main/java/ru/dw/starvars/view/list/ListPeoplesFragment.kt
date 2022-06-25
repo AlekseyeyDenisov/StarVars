@@ -136,11 +136,16 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+
                 val filterData = listRecycler.filter {
                     it.name.lowercase().contains(newText.lowercase())
                 }
-                adapterRecyclerListPeoples.submitList(filterData)
-                Log.d("@@@", "onQueryTextChange: $newText")
+                //Добавляем load more
+                val lastItem = listRecycler.last()
+                val mutableListData = filterData.toMutableList()
+                mutableListData.add(lastItem)
+
+                adapterRecyclerListPeoples.submitList(mutableListData)
                 return false
             }
         })
