@@ -28,7 +28,7 @@ object RepositoryIpl : Repository, DataBaseLocal {
         url: String,
         responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel
     ) {
-        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.ResponseListCallBackRetrofit {
+        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.GenericCallBackRetrofit<PeoplesListResponsePojo> {
 
 
             override fun success(pogo: PeoplesListResponsePojo) {

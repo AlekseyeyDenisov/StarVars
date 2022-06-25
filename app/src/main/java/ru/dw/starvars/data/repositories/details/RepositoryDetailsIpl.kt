@@ -5,7 +5,7 @@ import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.repositories.list.DataBaseLocal
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-
+import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 
 
 object RepositoryDetailsIpl : ApiRetrofitDetailsInterface {
@@ -14,7 +14,7 @@ object RepositoryDetailsIpl : ApiRetrofitDetailsInterface {
 
     override fun getPlanetRequestUrl(
         url: String,
-        responseListCallBackRetrofit: RetrofitApiStarWars.ResponseListCallBackRetrofit
+        responseListCallBackRetrofit: RetrofitApiStarWars.GenericCallBackRetrofit<PlanetsPojo>
     ) {
         TODO("Not yet implemented")
     }
