@@ -2,7 +2,6 @@ package ru.dw.starvars.view.list
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -15,12 +14,13 @@ import kotlinx.coroutines.launch
 import ru.dw.starvars.R
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.view.list.recycler.AdapterRecyclerListPeoples
-import ru.dw.starvars.view.list.recycler.OnItemClickListener
-import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.utils.NetworkUtil
 import ru.dw.starvars.utils.START_PEOPLES_LIST_URL
 import ru.dw.starvars.utils.SharedPreferencesManager
+import ru.dw.starvars.view.details.DetailsFragment
+import ru.dw.starvars.view.list.recycler.AdapterRecyclerListPeoples
+import ru.dw.starvars.view.list.recycler.OnItemClickListener
+import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
 
 class ListPeoplesFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
@@ -105,7 +105,12 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(peoplesItemView: PeoplesItemView) {
-        Log.d("@@@", "onItemClick name: $peoplesItemView")
+        val bundle = DetailsFragment.bundleDetails(peoplesItemView)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add(
+            R.id.container,
+                DetailsFragment.newInstance(bundle)
+            ).addToBackStack("").commit()
 
     }
 
