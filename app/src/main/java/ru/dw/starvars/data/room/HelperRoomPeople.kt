@@ -3,6 +3,8 @@ package ru.dw.starvars.data.room
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.data.repositories.list.DataBaseLocal
+import ru.dw.starvars.data.room.entity.AttributesEntity
+import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.domain.model.ResultsItem
 import ru.dw.starvars.utils.*

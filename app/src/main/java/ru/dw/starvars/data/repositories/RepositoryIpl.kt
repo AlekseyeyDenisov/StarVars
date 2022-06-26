@@ -5,7 +5,8 @@ import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.repositories.list.DataBaseLocal
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.PeoplesEntity
+import ru.dw.starvars.data.room.entity.PeoplesEntity
+
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.viewmodel.list.Repository

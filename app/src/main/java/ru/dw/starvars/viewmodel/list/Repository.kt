@@ -1,7 +1,8 @@
 package ru.dw.starvars.viewmodel.list
 
 import androidx.lifecycle.LiveData
-import ru.dw.starvars.data.room.PeoplesEntity
+import ru.dw.starvars.data.room.entity.PeoplesEntity
+
 
 interface Repository {
     fun getRequestUrl(url:String, responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel)

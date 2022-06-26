@@ -3,6 +3,8 @@ package ru.dw.starvars.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import ru.dw.starvars.data.room.entity.AttributesEntity
+import ru.dw.starvars.data.room.entity.PeoplesEntity
 
 @Dao
 interface PeoplesDao {
@@ -39,6 +41,22 @@ interface AttributesDao {
     fun gelAttr(idPeoples: Long): List<AttributesEntity>
 
     @Query("DELETE  FROM attributes")
+    fun deleteAllAttr():Int
+
+
+}
+
+@Dao
+interface ValueAttrDao {
+
+    @Insert
+    fun insert(valueAttributesEntity: AttributesEntity): Long
+
+
+//    @Query("SELECT * FROM attributes WHERE idPeoples = :idPeoples")
+//    fun gelAttr(idPeoples: Long): List<AttributesEntity>
+
+    @Query("DELETE  FROM value_attributes")
     fun deleteAllAttr():Int
 
 

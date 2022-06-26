@@ -28,22 +28,24 @@ class MyApp : Application() {
         fun getDBRoom(): HelperRoomPeople {
             if (dbRoom == null) {
                 if (appContext != null) {
-                    dbRoom = Room.databaseBuilder(appContext!!, DBRoom::class.java, "test")
-                        .addMigrations(migration_1_2)
+                    dbRoom = Room.databaseBuilder(appContext!!, DBRoom::class.java, "db_star_wars")
+                        //.addMigrations(migration_1_2)
                         .build()
                 } else {
                     throw IllegalStateException("Пустой  appContext в APP")
                 }
             }
-            return HelperRoomPeople(dbRoom!!.peoplesDao(), dbRoom!!.attrDao())
+            return HelperRoomPeople(
+                dbRoom!!.peoplesDao(),
+                dbRoom!!.attrDao())
         }
 
-        private val migration_1_2: Migration = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE $CONSTANT_TABLE_PEOPLES ADD column viewTape TEXT NOT NULL DEFAULT '${VIEW_TAPE_CHARACTER}'")
-            }
-
-        }
+//        private val migration_1_2: Migration = object : Migration(1, 2) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                database.execSQL("ALTER TABLE $CONSTANT_TABLE_PEOPLES ADD column viewTape TEXT NOT NULL DEFAULT '${VIEW_TAPE_CHARACTER}'")
+//            }
+//
+//        }
     }
 
 }
