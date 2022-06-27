@@ -12,4 +12,5 @@
     <string name="birth_year">Birth year</string>
     <string name="gender">Gender</string>
     <string name="home_world">Home world</string>
+    <string name="films">Films</string>
 </resources>

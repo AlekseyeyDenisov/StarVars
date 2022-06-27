@@ -6,7 +6,7 @@ import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 interface ApiRetrofitListInterface {
     fun getListRequestUrl(
         url: String,
-        genericCallBackRetrofit: RetrofitApiStarWars.GenericCallBackRetrofit<PeoplesListResponsePojo>
+        genericCallBackRetrofit: RetrofitApiStarWars.CallBackRetrofit<PeoplesListResponsePojo>
     )
 
 }

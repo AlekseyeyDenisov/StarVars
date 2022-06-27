@@ -16,10 +16,6 @@ interface PeoplesDao {
     @Update
     fun update(peoplesEntity: PeoplesEntity): Int
 
-    @Query("SELECT * FROM peoples  WHERE name =:nameItem")
-    fun getItem(nameItem: String): PeoplesEntity
-
-
     @Query("SELECT * FROM peoples ")
     fun getAll(): LiveData<List<PeoplesEntity>>
 
@@ -45,14 +41,14 @@ interface AttributesDao {
     fun deleteAllAttr():Int
 
     @Query("SELECT * FROM attributes ")
-    fun getAll(): LiveData<List<AttributesEntity>>
+    fun getAll(): List<AttributesEntity>
 
 }
 
 @Dao
 interface ValueAttrDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(valueAttributesEntity: ValueAttrEntity): Long
 
 
@@ -60,7 +56,10 @@ interface ValueAttrDao {
     fun deleteAllAttr():Int
 
     @Query("SELECT * FROM value_attributes ")
-    fun getAll(): LiveData<List<ValueAttrEntity>>
+    fun getAll(): List<ValueAttrEntity>
+
+    @Query("SELECT * FROM value_attributes WHERE url =:url")
+    fun getValueAttr(url:String):ValueAttrEntity
 
 
 }

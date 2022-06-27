@@ -4,7 +4,7 @@ package ru.dw.starvars.viewmodel.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.dw.starvars.data.repositories.RepositoryIpl
+import ru.dw.starvars.data.repositories.list.RepositoryIpl
 import ru.dw.starvars.domain.cases.GetListPeoplesCase
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.view.list.ListState
@@ -23,7 +23,7 @@ class ListPeoplesViewModel : ViewModel() {
     fun refresh() = repository.refresh()
 
     private fun observeRoom() {
-        repository.getAll().observeForever { list ->
+        repository.getAllPeoples().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { peolesEntity ->
                 listItemView.add(mapperPeoplesEntityToPeoplesItemView(peolesEntity))

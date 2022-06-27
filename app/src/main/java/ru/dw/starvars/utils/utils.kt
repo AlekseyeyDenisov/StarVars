@@ -13,6 +13,8 @@ const val CONSTANT_ATTRIBUTE_FILMS = "films"
 const val CONSTANT_ATTRIBUTE_VEHICLES = "vehicles"
 const val CONSTANT_ATTRIBUTE_STARSHIPS = "starships"
 const val CONSTANT_ATTRIBUTE_SPECIES = "species"
+const val CONSTANT_ATTRIBUTE_HOME_WORLD = "homeworld"
+
 const val CONSTANT_TABLE_PEOPLES = "peoples"
 const val VIEW_TAPE_CHARACTER = 1
 const val VIEW_TAPE_LOAD_MORE = 0

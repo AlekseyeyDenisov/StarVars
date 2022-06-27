@@ -21,10 +21,9 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
             .create(RetrofitApi::class.java)
     }
 
-
     override fun getListRequestUrl(
         url: String,
-        genericCallBackRetrofit: GenericCallBackRetrofit<PeoplesListResponsePojo>
+        genericCallBackRetrofit: CallBackRetrofit<PeoplesListResponsePojo>
     ) {
         val callBackUrl = CallBackUrl<PeoplesListResponsePojo>()
         retrofit
@@ -36,7 +35,7 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
 
     fun getPlanetRequestUrl(
         url: String,
-        genericCallBackRetrofit: GenericCallBackRetrofit<PlanetsPojo>
+        genericCallBackRetrofit: CallBackRetrofit<PlanetsPojo>
     ) {
         val callBackUrl = CallBackUrl<PlanetsPojo>()
         retrofit
@@ -44,12 +43,11 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
             .enqueue(
                 callBackUrl.callback(genericCallBackRetrofit)
             )
+
     }
 
 
-
-
-    interface GenericCallBackRetrofit<T> {
+    interface CallBackRetrofit<T> {
         fun success(pogo: T)
         fun error(error: String)
     }

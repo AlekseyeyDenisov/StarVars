@@ -1,25 +1,23 @@
-package ru.dw.starvars.data.repositories
+package ru.dw.starvars.data.repositories.list
 
 import androidx.lifecycle.LiveData
-import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
-import ru.dw.starvars.data.repositories.list.DataBaseLocal
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.room.HelperRoomPeople
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
-import ru.dw.starvars.viewmodel.list.Repository
+import ru.dw.starvars.viewmodel.list.RepositoryList
 
 
-class RepositoryIpl : Repository, DataBaseLocal {
+class RepositoryIpl : RepositoryList, DataBaseListLocal {
     private val dataApi: ApiRetrofitListInterface = RetrofitApiStarWars
-    private val dataRoom:DataBaseLocal = HelperRoomPeople()
+    private val dataRoom:DataBaseListLocal = HelperRoomPeople()
 
-    override fun getAll(): LiveData<List<PeoplesEntity>> = dataRoom.getAll()
+    override fun getAllPeoples(): LiveData<List<PeoplesEntity>> = dataRoom.getAllPeoples()
 
-    override fun insertUpdateDatabase(pogo: PeoplesListResponsePojo) {
-        dataRoom.insertUpdateDatabase(pogo)
+    override fun insertDatabasePeoples(pogo: PeoplesListResponsePojo) {
+        dataRoom.insertDatabasePeoples(pogo)
     }
 
     override fun refresh() = dataRoom.refresh()
@@ -29,11 +27,11 @@ class RepositoryIpl : Repository, DataBaseLocal {
         url: String,
         responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel
     ) {
-        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.GenericCallBackRetrofit<PeoplesListResponsePojo> {
+        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.CallBackRetrofit<PeoplesListResponsePojo> {
 
 
             override fun success(pogo: PeoplesListResponsePojo) {
-                insertUpdateDatabase(pogo)
+                insertDatabasePeoples(pogo)
             }
 
             override fun error(error: String) {

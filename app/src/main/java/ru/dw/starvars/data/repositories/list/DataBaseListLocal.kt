@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 
-interface DataBaseLocal {
-    fun getAll(): LiveData<List<PeoplesEntity>>
-    fun insertUpdateDatabase(pogo: PeoplesListResponsePojo)
+interface DataBaseListLocal {
+    fun getAllPeoples(): LiveData<List<PeoplesEntity>>
+    fun insertDatabasePeoples(pogo: PeoplesListResponsePojo)
     fun refresh()
 }
