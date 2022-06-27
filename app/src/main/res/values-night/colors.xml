@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_load_more">#FF0000</color>
+
+    <color name="bg_details">#000000</color>
+
+    <color name="color_header">#FFFFFF</color>
+    <color name="color_title">#CCFFFFFF</color>
+    <color name="color_description">#80FFFFFF</color>
+
+</resources>
