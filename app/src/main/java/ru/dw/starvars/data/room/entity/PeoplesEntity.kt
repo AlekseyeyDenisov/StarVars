@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.room.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -37,24 +37,8 @@ data class AttributesEntity(
     val url: String
 )
 
-@Entity(tableName = "vehicles")
-data class VehiclesEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id:Long,
-    val url: String,
-    val name: String
-)
-
-@Entity(tableName = "species")
-data class SpeciesEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id:Long,
-    val url: String,
-    val name: String
-)
-
-@Entity(tableName = "starships")
-data class StarshipsEntity(
+@Entity(tableName = "value_attributes")
+data class ValueAttrEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Long,
     val url: String,
