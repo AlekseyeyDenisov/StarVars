@@ -1,10 +1,10 @@
 package ru.dw.starvars.data.repositories
 
 import androidx.lifecycle.LiveData
-import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.repositories.list.DataBaseLocal
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
+import ru.dw.starvars.data.room.HelperRoomPeople
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
@@ -12,9 +12,9 @@ import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.viewmodel.list.Repository
 
 
-object RepositoryIpl : Repository, DataBaseLocal {
+class RepositoryIpl : Repository, DataBaseLocal {
     private val dataApi: ApiRetrofitListInterface = RetrofitApiStarWars
-    private val dataRoom:DataBaseLocal = MyApp.getDBRoom()
+    private val dataRoom:DataBaseLocal = HelperRoomPeople()
 
     override fun getAll(): LiveData<List<PeoplesEntity>> = dataRoom.getAll()
 

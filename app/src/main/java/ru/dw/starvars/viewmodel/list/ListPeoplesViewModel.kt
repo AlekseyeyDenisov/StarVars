@@ -13,7 +13,7 @@ import ru.dw.starvars.utils.mapperPeoplesEntityToPeoplesItemView
 
 class ListPeoplesViewModel : ViewModel() {
     private var liveData: MutableLiveData<ListState> = MutableLiveData()
-    private val repository = RepositoryIpl
+    private val repository = RepositoryIpl()
     private val getPeoplesList = GetListPeoplesCase(repository)
 
     init {

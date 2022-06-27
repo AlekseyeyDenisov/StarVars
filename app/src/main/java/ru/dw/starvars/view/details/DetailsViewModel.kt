@@ -6,7 +6,7 @@ import ru.dw.starvars.data.repositories.details.RepositoryDetailsIpl
 
 class DetailsViewModel : ViewModel() {
 
-    private val repository: ApiRetrofitDetailsInterface = RepositoryDetailsIpl
+    private val repository: ApiRetrofitDetailsInterface = RepositoryDetailsIpl()
 
 
 
