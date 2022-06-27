@@ -28,15 +28,6 @@ data class PeoplesEntity(
     val nextPage:String? = null
 ):Parcelable
 
-@Entity(tableName = "attributes")
-data class AttributesEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id:Long,
-    val idPeoples:Long,
-    val attr:String,
-    val url: String
-)
-
 @Entity(tableName = "value_attributes")
 data class ValueAttrEntity(
     @PrimaryKey(autoGenerate = true)
