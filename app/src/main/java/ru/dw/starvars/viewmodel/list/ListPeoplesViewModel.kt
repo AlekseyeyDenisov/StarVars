@@ -25,8 +25,8 @@ class ListPeoplesViewModel : ViewModel() {
     private fun observeRoom() {
         repository.getAllPeoples().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
-            list.forEach { peolesEntity ->
-                listItemView.add(mapperPeoplesEntityToPeoplesItemView(peolesEntity))
+            list.forEach { entity ->
+                listItemView.add(mapperPeoplesEntityToPeoplesItemView(entity))
             }
             liveData.postValue(ListState.Success(listItemView))
         }

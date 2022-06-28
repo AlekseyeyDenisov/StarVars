@@ -43,11 +43,17 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setHasOptionsMenu(true)
+
         _binding = FragmentListPeoplsBinding.inflate(inflater, container, false)
         pref = SharedPreferencesManager(requireContext())
         return binding.root
     }
+
+    override fun onResume() {
+        setHasOptionsMenu(true)
+        super.onResume()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -106,12 +112,29 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
     override fun onItemClick(peoplesItemView: PeoplesItemView) {
         val bundle = DetailsFragment.bundleDetails(peoplesItemView)
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(
-            R.id.container,
-                DetailsFragment.newInstance(bundle)
-            ).addToBackStack("").commit()
 
+        if (isOnePanelMode()){
+            launchFragment(DetailsFragment.newInstance(bundle),R.id.container)
+
+
+        }else{
+            launchFragment(DetailsFragment.newInstance(bundle),R.id.detailsContainer)
+        }
+    }
+    private fun launchFragment(fragment: Fragment, containerId: Int) {
+        requireActivity().supportFragmentManager.popBackStack()
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(
+                R.anim.enter_right_to_left,
+                R.anim.exit_right_to_left,
+                R.anim.enter_left_to_right,
+                R.anim.exit_left_to_right,
+
+            )
+            .add(containerId, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
@@ -124,10 +147,6 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             getString(R.string.no_internet_connection),
             Toast.LENGTH_SHORT
         ).show()
-    }
-
-    private fun icConnect(): Boolean {
-        return NetworkUtil.getConnectivityStatusString(requireContext())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -151,9 +170,10 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
                 mutableListData.add(lastItem)
 
                 adapterRecyclerListPeoples.submitList(mutableListData)
-                return false
+                return true
             }
         })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -169,6 +189,15 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             }
         }
         return false
+    }
+
+    private fun isOnePanelMode():Boolean{
+        return binding.detailsContainer == null
+    }
+
+
+    private fun icConnect(): Boolean {
+        return NetworkUtil.getConnectivityStatusString(requireContext())
     }
 
     override fun onDestroy() {
