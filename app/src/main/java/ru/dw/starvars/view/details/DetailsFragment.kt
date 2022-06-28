@@ -26,6 +26,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(false)
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,7 +35,6 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val peoplesItemView = arguments?.getParcelable<PeoplesItemView>(BUNDLE_DETAILS)
         render(peoplesItemView)
-
 
     }
 
@@ -58,7 +58,6 @@ class DetailsFragment : Fragment() {
         peoplesItemView?.birthYear?.let { binding.birthYear.text = it }
         peoplesItemView?.gender?.let { binding.gender.text = it }
     }
-
 
     companion object {
         private const val BUNDLE_DETAILS = "key_bundle_details"
