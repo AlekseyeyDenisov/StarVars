@@ -9,15 +9,15 @@ class DetailsViewModel : ViewModel() {
     private val repository: RepositoryDetails = RepositoryDetailsIpl()
 
 
-    fun getNameAttr(url: String, attr: String, name: (String) -> Unit) {
+    fun getNameAttr(url: String, isInternet: Boolean, name: (String) -> Unit) {
         Thread {
             val valueRoom = repository.getValueAttr(url)
             if (valueRoom != null) {
                 Handler(Looper.getMainLooper()).post {
                     name(valueRoom.name)
                 }
-            } else {
-                repository.getRequestUrl(url, attr) { value ->
+            } else if (isInternet) {
+                repository.getRequestUrl(url) { value ->
                     Handler(Looper.getMainLooper()).post {
                         name(value)
                     }

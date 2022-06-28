@@ -5,7 +5,6 @@ import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.data.room.HelperRooDetails
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
-import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
 import ru.dw.starvars.viewmodel.details.RepositoryDetails
 
 
@@ -13,10 +12,9 @@ class RepositoryDetailsIpl : RepositoryDetails {
     private val dataApi = RetrofitApiStarWars
     private val dataRoom: DataBaseDetailsLocal = HelperRooDetails()
 
-    override fun getRequestUrl(url: String, attr: String, name: (String) -> Unit) {
-        when (attr) {
-            CONSTANT_ATTRIBUTE_HOME_WORLD -> getIpiPlanet(url, name)
-        }
+    override fun getRequestUrl(url: String, name: (String) -> Unit) {
+        getIpiPlanet(url, name)
+
     }
 
     private fun getIpiPlanet(url: String, name: (String) -> Unit) {

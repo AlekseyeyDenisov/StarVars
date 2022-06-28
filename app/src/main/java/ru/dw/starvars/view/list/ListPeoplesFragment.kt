@@ -138,7 +138,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
-        if (icConnect())
+        if (isInternet())
             peoplesItemView.nextPage?.let {
                 viewModel.requestUrl(it)
             }
@@ -196,7 +196,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
 
-    private fun icConnect(): Boolean {
+    private fun isInternet(): Boolean {
         return NetworkUtil.getConnectivityStatusString(requireContext())
     }
 

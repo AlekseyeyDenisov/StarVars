@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
+import ru.dw.starvars.utils.NetworkUtil
 import ru.dw.starvars.viewmodel.details.DetailsViewModel
 
 
@@ -42,7 +42,7 @@ class DetailsFragment : Fragment() {
         initViewDataBundle(peoplesItemView)
 
         peoplesItemView?.homeWorld?.let { it ->
-            viewModel.getNameAttr(it, CONSTANT_ATTRIBUTE_HOME_WORLD){ name->
+            viewModel.getNameAttr(it,isInternet()){ name->
                 binding.homeWorld.text = name
             }
         }
@@ -72,6 +72,9 @@ class DetailsFragment : Fragment() {
                 arguments = bundle
             }
         }
+    }
+    private fun isInternet(): Boolean {
+        return NetworkUtil.getConnectivityStatusString(requireContext())
     }
 
     override fun onDestroy() {
