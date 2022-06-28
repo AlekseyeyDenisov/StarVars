@@ -4,9 +4,7 @@ package ru.dw.starvars.data.repositories.details
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.data.room.HelperRooDetails
-import ru.dw.starvars.data.room.entity.AttributesEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
-import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_FILMS
 import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
 import ru.dw.starvars.viewmodel.details.RepositoryDetails
 
@@ -42,7 +40,6 @@ class RepositoryDetailsIpl : RepositoryDetails {
             })
     }
 
-    override fun getAllAttr(): List<AttributesEntity> = dataRoom.getAllAttr()
     override fun getAllValueAttr(): List<ValueAttrEntity> = dataRoom.getAllValueAttr()
     override fun getValueAttr(url: String): ValueAttrEntity = dataRoom.getValueAttr(url)
 

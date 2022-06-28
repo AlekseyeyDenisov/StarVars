@@ -29,7 +29,6 @@ class RepositoryIpl : RepositoryList, DataBaseListLocal {
     ) {
         dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.CallBackRetrofit<PeoplesListResponsePojo> {
 
-
             override fun success(pogo: PeoplesListResponsePojo) {
                 insertDatabasePeoples(pogo)
             }
