@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.dw.starvars.MainActivity
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.utils.NetworkUtil
@@ -26,6 +27,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as MainActivity).supportActionBar?.hide()
         setHasOptionsMenu(false)
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -61,15 +63,12 @@ class DetailsFragment : Fragment() {
 
     companion object {
         private const val BUNDLE_DETAILS = "key_bundle_details"
-        fun bundleDetails(peoplesItemView: PeoplesItemView): Bundle {
-            return Bundle().apply {
-                putParcelable(BUNDLE_DETAILS, peoplesItemView)
-            }
-        }
 
-        fun newInstance(bundle: Bundle): DetailsFragment {
+        fun newInstance(peoplesItemView: PeoplesItemView): DetailsFragment {
             return DetailsFragment().apply {
-                arguments = bundle
+                arguments = Bundle().apply {
+                    putParcelable(BUNDLE_DETAILS, peoplesItemView)
+                }
             }
         }
     }

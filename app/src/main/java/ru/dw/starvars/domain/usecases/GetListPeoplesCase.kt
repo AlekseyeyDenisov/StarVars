@@ -1,4 +1,4 @@
-package ru.dw.starvars.domain.cases
+package ru.dw.starvars.domain.usecases
 
 
 

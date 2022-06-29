@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.dw.starvars.MainActivity
 import ru.dw.starvars.R
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
@@ -51,6 +52,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         setHasOptionsMenu(true)
+        (requireActivity() as MainActivity).supportActionBar?.show()
         super.onResume()
     }
 
@@ -111,16 +113,13 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(peoplesItemView: PeoplesItemView) {
-        val bundle = DetailsFragment.bundleDetails(peoplesItemView)
-
-        if (isOnePanelMode()){
-            launchFragment(DetailsFragment.newInstance(bundle),R.id.container)
-
-
-        }else{
-            launchFragment(DetailsFragment.newInstance(bundle),R.id.detailsContainer)
+        if (isOnePanelMode()) {
+            launchFragment(DetailsFragment.newInstance(peoplesItemView), R.id.container)
+        } else {
+            launchFragment(DetailsFragment.newInstance(peoplesItemView), R.id.detailsContainer)
         }
     }
+
     private fun launchFragment(fragment: Fragment, containerId: Int) {
         requireActivity().supportFragmentManager.popBackStack()
         requireActivity().supportFragmentManager
@@ -131,7 +130,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
                 R.anim.enter_left_to_right,
                 R.anim.exit_left_to_right,
 
-            )
+                )
             .add(containerId, fragment)
             .addToBackStack(null)
             .commit()
@@ -191,7 +190,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         return false
     }
 
-    private fun isOnePanelMode():Boolean{
+    private fun isOnePanelMode(): Boolean {
         return binding.detailsContainer == null
     }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.dw.starvars.data.repositories.list.RepositoryIpl
-import ru.dw.starvars.domain.cases.GetListPeoplesCase
+import ru.dw.starvars.domain.usecases.GetListPeoplesCase
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.view.list.ListState
 import ru.dw.starvars.utils.mapperPeoplesEntityToPeoplesItemView
