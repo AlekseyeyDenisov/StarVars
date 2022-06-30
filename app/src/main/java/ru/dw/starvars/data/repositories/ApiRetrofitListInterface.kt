@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.repositories.list
+package ru.dw.starvars.data.repositories
 
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo

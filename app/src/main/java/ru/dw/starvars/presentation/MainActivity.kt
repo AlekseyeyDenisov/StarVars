@@ -1,8 +1,9 @@
-package ru.dw.starvars
+package ru.dw.starvars.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.dw.starvars.view.list.ListPeoplesFragment
+import ru.dw.starvars.R
+import ru.dw.starvars.presentation.view.list.ListPeoplesFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

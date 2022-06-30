@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.list
+package ru.dw.starvars.presentation.view.list
 
 
 import android.os.Bundle
@@ -11,17 +11,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.dw.starvars.MainActivity
 import ru.dw.starvars.R
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.presentation.MainActivity
+import ru.dw.starvars.presentation.view.details.DetailsFragment
+import ru.dw.starvars.presentation.view.list.recycler.AdapterRecyclerListPeoples
+import ru.dw.starvars.presentation.view.list.recycler.OnItemClickListener
+import ru.dw.starvars.presentation.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.utils.NetworkUtil
 import ru.dw.starvars.utils.START_PEOPLES_LIST_URL
 import ru.dw.starvars.utils.SharedPreferencesManager
-import ru.dw.starvars.view.details.DetailsFragment
-import ru.dw.starvars.view.list.recycler.AdapterRecyclerListPeoples
-import ru.dw.starvars.view.list.recycler.OnItemClickListener
-import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
 
 class ListPeoplesFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
@@ -44,18 +44,11 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        setHasOptionsMenu(true)
         _binding = FragmentListPeoplsBinding.inflate(inflater, container, false)
         pref = SharedPreferencesManager(requireContext())
         return binding.root
     }
-
-    override fun onResume() {
-        setHasOptionsMenu(true)
-        (requireActivity() as MainActivity).supportActionBar?.show()
-        super.onResume()
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

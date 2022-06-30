@@ -1,29 +1,33 @@
-package ru.dw.starvars.viewmodel.list
+package ru.dw.starvars.presentation.viewmodel.list
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.dw.starvars.data.repositories.list.RepositoryIpl
-import ru.dw.starvars.domain.usecases.GetListPeoplesCase
+import ru.dw.starvars.data.repositories.RepositoryIpl
+import ru.dw.starvars.domain.usecases.GetListPeoplesRequestUrlUseCase
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.view.list.ListState
+import ru.dw.starvars.domain.usecases.GetAllPeoples
+import ru.dw.starvars.domain.usecases.RefreshBaseDataUseCases
+import ru.dw.starvars.presentation.view.list.ListState
 import ru.dw.starvars.utils.mapperPeoplesEntityToPeoplesItemView
 
 
 class ListPeoplesViewModel : ViewModel() {
     private var liveData: MutableLiveData<ListState> = MutableLiveData()
-    private val repository = RepositoryIpl()
-    private val getPeoplesList = GetListPeoplesCase(repository)
+    private val repository = RepositoryIpl
+    private val getAllPeoples = GetAllPeoples(repository)
+    private val refreshBaseDataUseCases = RefreshBaseDataUseCases(repository)
+    private val getListPeoplesRequestUrlUseCase = GetListPeoplesRequestUrlUseCase(repository)
 
     init {
         observeRoom()
     }
 
-    fun refresh() = repository.refresh()
+    fun refresh() = refreshBaseDataUseCases
 
     private fun observeRoom() {
-        repository.getAllPeoples().observeForever { list ->
+        getAllPeoples.invoke().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { entity ->
                 listItemView.add(mapperPeoplesEntityToPeoplesItemView(entity))
@@ -38,7 +42,7 @@ class ListPeoplesViewModel : ViewModel() {
     fun requestUrl(url: String) {
         liveData.value = ListState.Loading
 
-        getPeoplesList.getListPeoples(url,  object : ResponseCallBackViewModel {
+        getListPeoplesRequestUrlUseCase(url,  object : ResponseCallBackViewModel {
             override fun success(listPeoplesItemView: List<PeoplesItemView>) {
                 liveData.postValue(ListState.Success(listPeoplesItemView))
 

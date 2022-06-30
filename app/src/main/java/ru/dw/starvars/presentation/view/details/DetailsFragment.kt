@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.details
+package ru.dw.starvars.presentation.view.details
 
 
 import android.os.Bundle
@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.dw.starvars.MainActivity
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.presentation.MainActivity
 import ru.dw.starvars.utils.NetworkUtil
-import ru.dw.starvars.viewmodel.details.DetailsViewModel
+import ru.dw.starvars.presentation.viewmodel.details.DetailsViewModel
 
 
 class DetailsFragment : Fragment() {
@@ -27,8 +27,6 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (requireActivity() as MainActivity).supportActionBar?.hide()
-        setHasOptionsMenu(false)
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,5 +77,22 @@ class DetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+    override fun onResume() {
+        super.onResume()
+        showHideActionBar(false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        showHideActionBar(true)
+    }
+
+    private fun showHideActionBar(visibility:Boolean) {
+        if (visibility) {
+            (requireActivity() as MainActivity).supportActionBar?.show()
+        } else {
+            (requireActivity() as MainActivity).supportActionBar?.hide()
+        }
     }
 }

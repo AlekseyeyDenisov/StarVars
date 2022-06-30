@@ -1,4 +1,4 @@
-package ru.dw.starvars.viewmodel.details
+package ru.dw.starvars.domain.repository
 
 
 import ru.dw.starvars.data.room.entity.ValueAttrEntity

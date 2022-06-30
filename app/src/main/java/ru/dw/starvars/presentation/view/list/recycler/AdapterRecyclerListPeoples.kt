@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.list.recycler
+package ru.dw.starvars.presentation.view.list.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

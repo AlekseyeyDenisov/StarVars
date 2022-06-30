@@ -3,18 +3,20 @@ package ru.dw.starvars.data.room
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.MyApp
-import ru.dw.starvars.data.repositories.list.DataBaseListLocal
+import ru.dw.starvars.data.repositories.LocalBase
 import ru.dw.starvars.data.room.entity.PeoplesEntity
+import ru.dw.starvars.data.room.entity.ValueAttrEntity
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.domain.model.ResultsItem
-import ru.dw.starvars.utils.*
+import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
+import ru.dw.starvars.utils.convertPogoToEntity
 
 
-class HelperRoomPeople : DataBaseListLocal  {
-    private val db:DBRoom = MyApp.dbRoom
+class HelperRoomPeople : LocalBase {
+    private val db: DBRoom = MyApp.dbRoom
 
 
-    override fun refresh() {
+    fun refresh() {
         db.peoplesDao().deleteAll()
         db.valueDao().deleteAllAttr()
     }
@@ -43,6 +45,15 @@ class HelperRoomPeople : DataBaseListLocal  {
     private fun insertItem(item: ResultsItem) {
         db.peoplesDao().insert(convertPogoToEntity(item))
 
+    }
+    override fun getAllValueAttr(): List<ValueAttrEntity> = db.valueDao().getAll()
+
+    override fun insertValueAttr(valueAttributesEntity: ValueAttrEntity) {
+        db.valueDao().insert(valueAttributesEntity)
+    }
+
+    override fun getValueAttr(url: String): ValueAttrEntity {
+        return db.valueDao().getValueAttr(url)
     }
 
 
