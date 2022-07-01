@@ -3,7 +3,7 @@ package ru.dw.starvars.data.repositories
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 
 interface LocalBase {
     fun getAllPeoples(): LiveData<List<PeoplesEntity>>

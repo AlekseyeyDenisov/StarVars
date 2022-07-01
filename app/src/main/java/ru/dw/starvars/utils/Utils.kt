@@ -2,7 +2,7 @@ package ru.dw.starvars.utils
 
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.domain.model.ResultsItem
+import ru.dw.starvars.data.retrofit.model.ResultsItem
 
 object Utils {
     const val BASE_URL = "https://swapi.dev/api/"

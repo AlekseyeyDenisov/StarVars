@@ -7,7 +7,7 @@ import ru.dw.starvars.data.room.HelperRoomPeople
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
 
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 import ru.dw.starvars.presentation.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.domain.repository.RepositoryList
 import ru.dw.starvars.domain.repository.RepositoryDetails

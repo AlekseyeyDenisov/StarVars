@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.ApiRetrofitListInterface
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 import ru.dw.starvars.utils.Utils
 
 

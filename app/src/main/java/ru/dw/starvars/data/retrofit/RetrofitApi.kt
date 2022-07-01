@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 
 
 interface RetrofitApi {

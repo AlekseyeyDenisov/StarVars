@@ -6,8 +6,8 @@ import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.repositories.LocalBase
 import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
-import ru.dw.starvars.domain.model.ResultsItem
+import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.retrofit.model.ResultsItem
 import ru.dw.starvars.utils.Utils
 
 

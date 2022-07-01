@@ -25,7 +25,7 @@ data class PeoplesEntity(
     val name: String = "@@@",
     val height: String? = null,
     var viewTape: Int = Utils.VIEW_TAPE_CHARACTER,
-    val nextPage:String? = null
+    var nextPage:String? = null
 ):Parcelable
 
 @Entity(tableName = "value_attributes")

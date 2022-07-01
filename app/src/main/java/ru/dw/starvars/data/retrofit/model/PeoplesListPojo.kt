@@ -1,4 +1,4 @@
-package ru.dw.starvars.domain.model
+package ru.dw.starvars.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 
