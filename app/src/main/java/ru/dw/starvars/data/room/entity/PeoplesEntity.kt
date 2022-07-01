@@ -4,11 +4,11 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import ru.dw.starvars.utils.CONSTANT_TABLE_PEOPLES
-import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
+import ru.dw.starvars.utils.Utils
+
 
 @Parcelize
-@Entity(tableName = CONSTANT_TABLE_PEOPLES)
+@Entity(tableName = Utils.CONSTANT_TABLE_PEOPLES)
 data class PeoplesEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Long,
@@ -24,7 +24,7 @@ data class PeoplesEntity(
     val eyeColor: String? = null,
     val name: String = "@@@",
     val height: String? = null,
-    var viewTape: Int = VIEW_TAPE_CHARACTER,
+    var viewTape: Int = Utils.VIEW_TAPE_CHARACTER,
     val nextPage:String? = null
 ):Parcelable
 

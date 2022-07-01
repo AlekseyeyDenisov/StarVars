@@ -8,8 +8,7 @@ import ru.dw.starvars.data.room.entity.PeoplesEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
 import ru.dw.starvars.domain.model.ResultsItem
-import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
-import ru.dw.starvars.utils.convertPogoToEntity
+import ru.dw.starvars.utils.Utils
 
 
 class HelperRoomPeople : LocalBase {
@@ -25,7 +24,7 @@ class HelperRoomPeople : LocalBase {
 
     override fun insertDatabasePeoples(pogo: PeoplesListResponsePojo) {
         Thread {
-            db.peoplesDao().deleteNextPage(VIEW_TAPE_LOAD_MORE)
+            db.peoplesDao().deleteNextPage(Utils.VIEW_TAPE_LOAD_MORE)
 
             pogo.results?.forEach { item ->
                 if (item != null) {
@@ -39,11 +38,11 @@ class HelperRoomPeople : LocalBase {
     }
 
     private fun crateLoadMore(pogo: PeoplesListResponsePojo): PeoplesEntity {
-        return PeoplesEntity(0, viewTape = VIEW_TAPE_LOAD_MORE, nextPage = pogo.next)
+        return PeoplesEntity(0, viewTape = Utils.VIEW_TAPE_LOAD_MORE, nextPage = pogo.next)
     }
 
     private fun insertItem(item: ResultsItem) {
-        db.peoplesDao().insert(convertPogoToEntity(item))
+        db.peoplesDao().insert(Utils.convertPogoToEntity(item))
 
     }
     override fun getAllValueAttr(): List<ValueAttrEntity> = db.valueDao().getAll()

@@ -71,7 +71,7 @@ class DetailsFragment : Fragment() {
         }
     }
     private fun isInternet(): Boolean {
-        return NetworkUtil.getConnectivityStatusString(requireContext())
+        return NetworkUtil.getConnectivityStatus(requireContext())
     }
 
     override fun onDestroy() {

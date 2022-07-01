@@ -14,14 +14,13 @@ import kotlinx.coroutines.launch
 import ru.dw.starvars.R
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.presentation.MainActivity
 import ru.dw.starvars.presentation.view.details.DetailsFragment
 import ru.dw.starvars.presentation.view.list.recycler.AdapterRecyclerListPeoples
 import ru.dw.starvars.presentation.view.list.recycler.OnItemClickListener
 import ru.dw.starvars.presentation.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.utils.NetworkUtil
-import ru.dw.starvars.utils.START_PEOPLES_LIST_URL
 import ru.dw.starvars.utils.SharedPreferencesManager
+import ru.dw.starvars.utils.Utils
 
 class ListPeoplesFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
@@ -66,7 +65,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
     private fun firstStart() {
         if (pref.getFirstStart()) {
-            viewModel.requestUrl(START_PEOPLES_LIST_URL)
+            viewModel.requestUrl(Utils.START_PEOPLES_LIST_URL)
         }
     }
 
@@ -175,7 +174,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
                     viewModel.refresh()
                     launch(Dispatchers.Main) {
-                        viewModel.requestUrl(START_PEOPLES_LIST_URL)
+                        viewModel.requestUrl(Utils.START_PEOPLES_LIST_URL)
                     }
                 }
             }
@@ -189,7 +188,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
 
     private fun isInternet(): Boolean {
-        return NetworkUtil.getConnectivityStatusString(requireContext())
+        return NetworkUtil.getConnectivityStatus(requireContext())
     }
 
     override fun onDestroy() {

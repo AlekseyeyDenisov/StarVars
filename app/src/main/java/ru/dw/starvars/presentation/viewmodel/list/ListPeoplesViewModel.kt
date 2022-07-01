@@ -10,7 +10,7 @@ import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.domain.usecases.GetAllPeoples
 import ru.dw.starvars.domain.usecases.RefreshBaseDataUseCases
 import ru.dw.starvars.presentation.view.list.ListState
-import ru.dw.starvars.utils.mapperPeoplesEntityToPeoplesItemView
+import ru.dw.starvars.utils.Utils
 
 
 class ListPeoplesViewModel : ViewModel() {
@@ -30,7 +30,7 @@ class ListPeoplesViewModel : ViewModel() {
         getAllPeoples.invoke().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { entity ->
-                listItemView.add(mapperPeoplesEntityToPeoplesItemView(entity))
+                listItemView.add(Utils.mapperPeoplesEntityToPeoplesItemView(entity))
             }
             liveData.postValue(ListState.Success(listItemView))
         }

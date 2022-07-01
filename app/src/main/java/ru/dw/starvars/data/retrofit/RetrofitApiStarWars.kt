@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.ApiRetrofitListInterface
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.domain.model.PeoplesListResponsePojo
-import ru.dw.starvars.utils.BASE_URL
+import ru.dw.starvars.utils.Utils
 
 
 object RetrofitApiStarWars : ApiRetrofitListInterface {
@@ -15,7 +15,7 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
 
     private fun initRetrofit(): RetrofitApi {
         return Retrofit.Builder().apply {
-            baseUrl(BASE_URL)
+            baseUrl(Utils.BASE_URL)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         }.build()
             .create(RetrofitApi::class.java)

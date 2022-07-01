@@ -2,7 +2,7 @@ package ru.dw.starvars.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
+import ru.dw.starvars.utils.Utils
 
 @Parcelize
 data class PeoplesItemView(
@@ -19,7 +19,7 @@ data class PeoplesItemView(
     val eyeColor: String? = null,
     val name: String,
     val height: String? = null,
-    var viewTape: Int = VIEW_TAPE_CHARACTER,
+    var viewTape: Int = Utils.VIEW_TAPE_CHARACTER,
     val nextPage:String? = null
 
 ): Parcelable
