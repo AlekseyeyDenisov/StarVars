@@ -50,7 +50,7 @@ class HelperRoomPeople : LocalBase {
     }
 
     private fun insertItem(item: ResultsItem) {
-        db.peoplesDao().insert(Utils.convertPogoToEntity(item))
+        db.peoplesDao().insert(PeopleListMapper().mapPogoToEntity(item))
 
     }
 

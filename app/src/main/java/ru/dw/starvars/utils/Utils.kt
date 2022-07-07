@@ -13,43 +13,5 @@ object Utils {
     const val VIEW_TAPE_CHARACTER = 1
     const val VIEW_TAPE_LOAD_MORE = 0
 
-    fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeopleDbModel): PeoplesItemView {
-        return PeoplesItemView(
-            peoplesEntity.id,
-            peoplesEntity.homeWorld,
-            peoplesEntity.gender,
-            peoplesEntity.skinColor,
-            peoplesEntity.edited,
-            peoplesEntity.created,
-            peoplesEntity.mass,
-            peoplesEntity.url,
-            peoplesEntity.hairColor,
-            peoplesEntity.birthYear,
-            peoplesEntity.eyeColor,
-            peoplesEntity.name,
-            peoplesEntity.height,
-            peoplesEntity.viewTape,
-            peoplesEntity.nextPage
-        )
-    }
 
-    fun convertPogoToEntity(resultsItem: ResultsItem): PeopleDbModel {
-        return PeopleDbModel(
-            0,
-            resultsItem.homeWorld,
-            resultsItem.gender,
-            resultsItem.skinColor,
-            resultsItem.edited,
-            resultsItem.created,
-            resultsItem.mass,
-            resultsItem.url,
-            resultsItem.hairColor,
-            resultsItem.birthYear,
-            resultsItem.eyeColor,
-            resultsItem.name,
-            resultsItem.height,
-            VIEW_TAPE_CHARACTER
-        )
-
-    }
 }

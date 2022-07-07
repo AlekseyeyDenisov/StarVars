@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.dw.starvars.MyApp
-import ru.dw.starvars.data.repositories.RepositoryIpl
+import ru.dw.starvars.data.room.PeopleListMapper
 import ru.dw.starvars.domain.usecases.GetListPeoplesRequestUrlUseCase
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.domain.usecases.GetAllPeoples
 import ru.dw.starvars.domain.usecases.RefreshBaseDataUseCases
 import ru.dw.starvars.presentation.view.list.ListState
-import ru.dw.starvars.utils.Utils
 
 
 class ListPeoplesViewModel : ViewModel() {
@@ -31,7 +30,7 @@ class ListPeoplesViewModel : ViewModel() {
         getAllPeoples.invoke().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { entity ->
-                listItemView.add(Utils.mapperPeoplesEntityToPeoplesItemView(entity))
+                listItemView.add(PeopleListMapper().mapDbModelToEntity(entity))
             }
             liveData.postValue(ListState.Success(listItemView))
         }

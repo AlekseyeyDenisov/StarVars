@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.dw.starvars.R
+import ru.dw.starvars.data.SharedPreferencesManager
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.presentation.view.details.DetailsFragment
@@ -19,7 +20,7 @@ import ru.dw.starvars.presentation.view.list.recycler.AdapterRecyclerListPeoples
 import ru.dw.starvars.presentation.view.list.recycler.OnItemClickListener
 import ru.dw.starvars.presentation.viewmodel.list.ListPeoplesViewModel
 import ru.dw.starvars.utils.NetworkUtil
-import ru.dw.starvars.utils.SharedPreferencesManager
+
 import ru.dw.starvars.utils.Utils
 
 class ListPeoplesFragment : Fragment(), OnItemClickListener {
