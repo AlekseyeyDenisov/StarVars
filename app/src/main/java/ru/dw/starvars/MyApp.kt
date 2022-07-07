@@ -2,7 +2,6 @@ package ru.dw.starvars
 
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
 import ru.dw.starvars.data.repositories.RepositoryIpl
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.room.AppDataBase

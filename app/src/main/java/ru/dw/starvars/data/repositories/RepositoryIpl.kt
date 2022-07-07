@@ -11,6 +11,7 @@ import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.domain.repository.RepositoryDetails
 import ru.dw.starvars.domain.repository.RepositoryList
 import ru.dw.starvars.presentation.viewmodel.list.ListPeoplesViewModel
+import kotlin.concurrent.thread
 
 
 class RepositoryIpl(
@@ -48,7 +49,9 @@ class RepositoryIpl(
             object : RetrofitApiStarWars.CallBackRetrofit<PeoplesListResponsePojo> {
 
                 override fun success(pogo: PeoplesListResponsePojo) {
-                    insertDatabasePeoples(pogo)
+                    thread {
+                        insertDatabasePeoples(pogo)
+                    }
                 }
 
                 override fun error(error: String) {
@@ -73,9 +76,8 @@ class RepositoryIpl(
                     pogo.name?.let { valueName ->
                         name(valueName)
                         val entity = ValueAttrEntity(0, url, valueName)
-                        Thread {
-                            dataRoom.insertValueAttr(entity)
-                        }.start()
+                        dataRoom.insertValueAttr(entity)
+
                     }
                 }
 

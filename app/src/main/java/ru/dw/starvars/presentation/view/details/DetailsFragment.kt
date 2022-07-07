@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.presentation.MainActivity
-import ru.dw.starvars.utils.NetworkUtil
 import ru.dw.starvars.presentation.viewmodel.details.DetailsViewModel
+import ru.dw.starvars.utils.NetworkUtil
 
 
 class DetailsFragment : Fragment() {
