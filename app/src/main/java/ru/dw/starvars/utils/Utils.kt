@@ -1,8 +1,9 @@
 package ru.dw.starvars.utils
 
-import ru.dw.starvars.data.room.entity.PeoplesEntity
+
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.data.retrofit.model.ResultsItem
+import ru.dw.starvars.data.room.PeopleDbModel
 
 object Utils {
     const val BASE_URL = "https://swapi.dev/api/"
@@ -12,7 +13,7 @@ object Utils {
     const val VIEW_TAPE_CHARACTER = 1
     const val VIEW_TAPE_LOAD_MORE = 0
 
-    fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeoplesEntity): PeoplesItemView {
+    fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeopleDbModel): PeoplesItemView {
         return PeoplesItemView(
             peoplesEntity.id,
             peoplesEntity.homeWorld,
@@ -32,8 +33,8 @@ object Utils {
         )
     }
 
-    fun convertPogoToEntity(resultsItem: ResultsItem): PeoplesEntity {
-        return PeoplesEntity(
+    fun convertPogoToEntity(resultsItem: ResultsItem): PeopleDbModel {
+        return PeopleDbModel(
             0,
             resultsItem.homeWorld,
             resultsItem.gender,

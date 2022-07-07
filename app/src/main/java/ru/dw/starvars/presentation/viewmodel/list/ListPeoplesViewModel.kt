@@ -4,6 +4,7 @@ package ru.dw.starvars.presentation.viewmodel.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.repositories.RepositoryIpl
 import ru.dw.starvars.domain.usecases.GetListPeoplesRequestUrlUseCase
 import ru.dw.starvars.domain.model.PeoplesItemView
@@ -15,7 +16,7 @@ import ru.dw.starvars.utils.Utils
 
 class ListPeoplesViewModel : ViewModel() {
     private var liveData: MutableLiveData<ListState> = MutableLiveData()
-    private val repository = RepositoryIpl
+    private val repository = MyApp.repository
     private val getAllPeoples = GetAllPeoples(repository)
     private val refreshBaseDataUseCases = RefreshBaseDataUseCases(repository)
     private val getListPeoplesRequestUrlUseCase = GetListPeoplesRequestUrlUseCase(repository)

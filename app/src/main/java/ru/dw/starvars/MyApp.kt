@@ -3,26 +3,35 @@ package ru.dw.starvars
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import ru.dw.starvars.data.room.DBRoom
+import ru.dw.starvars.data.repositories.RepositoryIpl
+import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
+import ru.dw.starvars.data.room.AppDataBase
+import ru.dw.starvars.data.room.HelperRoomPeople
 
 
 class MyApp : Application() {
 
     companion object {
         var appContext:Context? = null
-        private var _dbRoom:DBRoom? = null
+        private var _dbRoom:AppDataBase? = null
         val dbRoom get() = _dbRoom!!
+        lateinit var repository:RepositoryIpl
     }
 
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        initDBRoom()
+        initDBRoom(this)
+        initRepository()
 
     }
 
-    private fun initDBRoom() {
-        _dbRoom = Room.databaseBuilder(appContext!!, DBRoom::class.java, "db_star_wars").build()
+    private fun initRepository() {
+        repository = RepositoryIpl(RetrofitApiStarWars(), HelperRoomPeople())
+    }
+
+    private fun initDBRoom(application: Application) {
+        _dbRoom = AppDataBase.getInstance(application)
     }
 
 

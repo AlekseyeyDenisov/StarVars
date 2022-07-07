@@ -4,13 +4,12 @@ package ru.dw.starvars.data.retrofit
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.dw.starvars.data.repositories.ApiRetrofitListInterface
+import ru.dw.starvars.data.repositories.ApiBase
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 import ru.dw.starvars.utils.Utils
 
-
-object RetrofitApiStarWars : ApiRetrofitListInterface {
+class RetrofitApiStarWars : ApiBase {
     private val retrofit: RetrofitApi = initRetrofit()
 
     private fun initRetrofit(): RetrofitApi {
@@ -33,7 +32,7 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
             )
     }
 
-    fun getPlanetRequestUrl(
+    override fun getPlanetRequestUrl(
         url: String,
         genericCallBackRetrofit: CallBackRetrofit<PlanetsPojo>
     ) {

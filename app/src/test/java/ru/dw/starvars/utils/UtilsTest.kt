@@ -3,16 +3,15 @@ package ru.dw.starvars.utils
 import org.junit.Assert.*
 
 import org.junit.Test
-import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
 import ru.dw.starvars.data.retrofit.model.ResultsItem
-import ru.dw.starvars.data.room.entity.PeoplesEntity
+import ru.dw.starvars.data.room.PeopleDbModel
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.utils.Utils.VIEW_TAPE_CHARACTER
 import ru.dw.starvars.utils.Utils.convertPogoToEntity
 import ru.dw.starvars.utils.Utils.mapperPeoplesEntityToPeoplesItemView
 
 class UtilsTest {
-    private val peoplesEntity  = PeoplesEntity(
+    private val peoplesEntity  = PeopleDbModel(
         0,
         "https://swapi.dev/api/planets/1/",
         "male",

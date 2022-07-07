@@ -3,20 +3,18 @@ package ru.dw.starvars.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ru.dw.starvars.data.room.entity.PeoplesEntity
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
 
 @Dao
 interface PeoplesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(peoplesEntity: PeoplesEntity): Long
+    fun insert(peoplesEntity: PeopleDbModel): Long
 
     @Update
-    fun update(peoplesEntity: PeoplesEntity): Int
+    fun update(peoplesEntity: PeopleDbModel): Int
 
     @Query("SELECT * FROM peoples ")
-    fun getAll(): LiveData<List<PeoplesEntity>>
+    fun getAll(): LiveData<List<PeopleDbModel>>
 
     @Query("DELETE  FROM peoples WHERE viewTape =:viewTape")
     fun deleteNextPage(viewTape:Int)
@@ -27,7 +25,7 @@ interface PeoplesDao {
 }
 
 @Dao
-interface ValueAttrDao {
+interface ValuePlanetDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(valueAttributesEntity: ValueAttrEntity): Long
@@ -40,7 +38,7 @@ interface ValueAttrDao {
     fun getAll(): List<ValueAttrEntity>
 
     @Query("SELECT * FROM value_attributes WHERE url =:url")
-    fun getValueAttr(url:String):ValueAttrEntity
+    fun getValuePlanet(url:String):ValueAttrEntity
 
 
 }

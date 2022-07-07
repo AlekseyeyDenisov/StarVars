@@ -1,13 +1,13 @@
 package ru.dw.starvars.domain.repository
 
 
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.data.room.ValueAttrEntity
 
 interface RepositoryDetails {
 
-    fun getRequestUrl(url: String, name:(String)->Unit)
+    fun getRequestPlanetUrl(url: String, name:(String)->Unit)
 
     fun getAllValueAttr(): List<ValueAttrEntity>
 
-    fun getValueAttr(url:String):ValueAttrEntity
+    fun getValuePlanet(url:String):ValueAttrEntity
 }

@@ -10,6 +10,6 @@ class GetListPeoplesRequestUrlUseCase(private val repository: RepositoryList) {
         url: String,
         responseCallBackViewModel: ListPeoplesViewModel.ResponseCallBackViewModel
     ) {
-        return repository.getRequestUrl(url,responseCallBackViewModel)
+        return repository.getRequestListUrl(url,responseCallBackViewModel)
     }
 }
