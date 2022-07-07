@@ -14,11 +14,11 @@ import ru.dw.starvars.presentation.view.list.ListState
 
 
 class ListPeoplesViewModel : ViewModel() {
-    private var liveData: MutableLiveData<ListState> = MutableLiveData()
     private val repository = MyApp.repository
     private val getAllPeoples = GetAllPeoples(repository)
     private val refreshBaseDataUseCases = RefreshBaseDataUseCases(repository)
     private val getListPeoplesRequestUrlUseCase = GetListPeoplesRequestUrlUseCase(repository)
+    private var liveData: MutableLiveData<ListState> = MutableLiveData()
 
     init {
         observeRoom()
@@ -30,7 +30,7 @@ class ListPeoplesViewModel : ViewModel() {
         getAllPeoples.invoke().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { entity ->
-                listItemView.add(PeopleListMapper().mapDbModelToEntity(entity))
+                listItemView.add(entity)
             }
             liveData.postValue(ListState.Success(listItemView))
         }

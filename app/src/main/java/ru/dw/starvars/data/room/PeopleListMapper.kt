@@ -44,4 +44,8 @@ class PeopleListMapper {
         peopleDbModel.nextPage
     )
 
+
+    fun mapListDbModelToListEntity(list: List<PeopleDbModel>) = list.map {
+        mapDbModelToEntity(it)
+    }
 }
