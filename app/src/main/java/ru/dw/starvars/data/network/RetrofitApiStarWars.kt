@@ -1,12 +1,12 @@
-package ru.dw.starvars.data.retrofit
+package ru.dw.starvars.data.network
 
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.ApiBase
-import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
-import ru.dw.starvars.data.retrofit.model.PlanetsPojo
+import ru.dw.starvars.data.network.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.network.model.PlanetsPojo
 import ru.dw.starvars.utils.Utils
 
 class RetrofitApiStarWars : ApiBase {

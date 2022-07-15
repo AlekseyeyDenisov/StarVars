@@ -1,6 +1,6 @@
 package ru.dw.starvars.domain.usecases
 
-import ru.dw.starvars.data.room.ValueAttrEntity
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 import ru.dw.starvars.domain.repository.RepositoryDetails
 
 class GetValueAttrUseCases(

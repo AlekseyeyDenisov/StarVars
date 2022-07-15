@@ -1,9 +1,11 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database
 
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.dw.starvars.data.database.model.PeopleDbModel
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 
 
 @Database( entities = [PeopleDbModel::class, ValueAttrEntity::class], version = 1

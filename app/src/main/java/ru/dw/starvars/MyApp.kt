@@ -3,9 +3,9 @@ package ru.dw.starvars
 import android.app.Application
 import android.content.Context
 import ru.dw.starvars.data.repositories.RepositoryIpl
-import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.AppDataBase
-import ru.dw.starvars.data.room.HelperRoomPeople
+import ru.dw.starvars.data.network.RetrofitApiStarWars
+import ru.dw.starvars.data.database.AppDataBase
+import ru.dw.starvars.data.database.HelperRoomPeople
 
 
 class MyApp : Application() {

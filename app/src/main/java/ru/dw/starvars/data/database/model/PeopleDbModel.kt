@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

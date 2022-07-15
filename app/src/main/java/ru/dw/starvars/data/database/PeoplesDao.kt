@@ -1,8 +1,10 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database
 
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import ru.dw.starvars.data.database.model.PeopleDbModel
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 
 @Dao
 interface PeoplesDao {
@@ -38,7 +40,7 @@ interface ValuePlanetDao {
     fun getAll(): List<ValueAttrEntity>
 
     @Query("SELECT * FROM value_attributes WHERE url =:url")
-    fun getValuePlanet(url:String):ValueAttrEntity
+    fun getValuePlanet(url:String): ValueAttrEntity
 
 
 }

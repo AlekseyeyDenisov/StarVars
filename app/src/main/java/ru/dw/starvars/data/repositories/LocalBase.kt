@@ -1,9 +1,9 @@
 package ru.dw.starvars.data.repositories
 
 import androidx.lifecycle.LiveData
-import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
-import ru.dw.starvars.data.room.PeopleDbModel
-import ru.dw.starvars.data.room.ValueAttrEntity
+import ru.dw.starvars.data.network.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.database.model.PeopleDbModel
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 
 interface LocalBase {
     fun getAllPeoples(): LiveData<List<PeopleDbModel>>

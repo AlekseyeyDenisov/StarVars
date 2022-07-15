@@ -1,11 +1,14 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database
 
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.MyApp
+import ru.dw.starvars.data.database.model.PeopleDbModel
+import ru.dw.starvars.data.database.model.ValueAttrEntity
+import ru.dw.starvars.data.mapper.StarWarsMapper
 import ru.dw.starvars.data.repositories.LocalBase
-import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
-import ru.dw.starvars.data.retrofit.model.ResultsItem
+import ru.dw.starvars.data.network.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.network.model.ResultsItem
 import ru.dw.starvars.utils.Utils
 import kotlin.concurrent.thread
 
@@ -50,7 +53,7 @@ class HelperRoomPeople : LocalBase {
     }
 
     private fun insertItem(item: ResultsItem) {
-        db.peoplesDao().insert(PeopleListMapper().mapPogoToEntity(item))
+        db.peoplesDao().insert(StarWarsMapper().mapPogoToEntity(item))
 
     }
 

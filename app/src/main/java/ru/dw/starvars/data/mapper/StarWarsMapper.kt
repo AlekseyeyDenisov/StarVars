@@ -1,10 +1,11 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.mapper
 
-import ru.dw.starvars.data.retrofit.model.ResultsItem
+import ru.dw.starvars.data.database.model.PeopleDbModel
+import ru.dw.starvars.data.network.model.ResultsItem
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.utils.Utils
 
-class PeopleListMapper {
+class StarWarsMapper {
 
     fun mapPogoToEntity(resultsItem: ResultsItem): PeopleDbModel {
         return PeopleDbModel(

@@ -6,14 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.dw.starvars.MyApp
 import ru.dw.starvars.domain.model.PeoplesItemView
-import ru.dw.starvars.domain.usecases.GetAllPeoples
+import ru.dw.starvars.domain.usecases.GetAllPeoplesUseCase
 import ru.dw.starvars.domain.usecases.GetListPeoplesRequestUrlUseCase
 import ru.dw.starvars.domain.usecases.RefreshBaseDataUseCases
 import ru.dw.starvars.presentation.view.list.ListState
 
 class ListPeoplesViewModel : ViewModel() {
     private val repository = MyApp.repository
-    private val getAllPeoples = GetAllPeoples(repository)
+    private val getAllPeoplesUseCase = GetAllPeoplesUseCase(repository)
     private val refreshBaseDataUseCases = RefreshBaseDataUseCases(repository)
     private val getListPeoplesRequestUrlUseCase = GetListPeoplesRequestUrlUseCase(repository)
     private var liveData: MutableLiveData<ListState> = MutableLiveData()
@@ -26,7 +26,7 @@ class ListPeoplesViewModel : ViewModel() {
 
 
     private fun observeRoom() {
-        getAllPeoples.invoke().observeForever { list ->
+        getAllPeoplesUseCase.invoke().observeForever { list ->
             val listItemView = mutableListOf<PeoplesItemView>()
             list.forEach { entity ->
                 listItemView.add(entity)

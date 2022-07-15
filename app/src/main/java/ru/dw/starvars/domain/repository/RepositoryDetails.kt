@@ -1,7 +1,7 @@
 package ru.dw.starvars.domain.repository
 
 
-import ru.dw.starvars.data.room.ValueAttrEntity
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 
 interface RepositoryDetails {
 
@@ -9,5 +9,5 @@ interface RepositoryDetails {
 
     fun getAllValueAttr(): List<ValueAttrEntity>
 
-    fun getValuePlanet(url:String):ValueAttrEntity
+    fun getValuePlanet(url:String): ValueAttrEntity
 }

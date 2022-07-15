@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.retrofit
+package ru.dw.starvars.data.network
 
 import retrofit2.Call
 import retrofit2.Callback

@@ -2,11 +2,11 @@ package ru.dw.starvars.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.retrofit.model.PeoplesListResponsePojo
-import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.data.room.PeopleListMapper
-import ru.dw.starvars.data.room.ValueAttrEntity
+import ru.dw.starvars.data.network.RetrofitApiStarWars
+import ru.dw.starvars.data.network.model.PeoplesListResponsePojo
+import ru.dw.starvars.data.network.model.PlanetsPojo
+import ru.dw.starvars.data.mapper.StarWarsMapper
+import ru.dw.starvars.data.database.model.ValueAttrEntity
 import ru.dw.starvars.domain.model.PeoplesItemView
 import ru.dw.starvars.domain.repository.RepositoryDetails
 import ru.dw.starvars.domain.repository.RepositoryList
@@ -18,7 +18,7 @@ class RepositoryIpl(
     private val dataApi: ApiBase,
     private val dataRoom: LocalBase
 ) : RepositoryList, RepositoryDetails {
-    private val mapper = PeopleListMapper()
+    private val mapper = StarWarsMapper()
 
 
     //    override fun getAllPeoples(): LiveData<List<PeoplesItemView>> =
