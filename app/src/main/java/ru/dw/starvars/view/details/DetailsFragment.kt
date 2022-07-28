@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.dw.starvars.databinding.FragmentDetailsBinding
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
 import ru.dw.starvars.viewmodel.details.DetailsViewModel
 
@@ -33,37 +33,37 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val peoplesItemView = arguments?.getParcelable<PeoplesItemView>(BUNDLE_DETAILS)
-        render(peoplesItemView)
+        val characterItemView = arguments?.getParcelable<CharacterItemView>(BUNDLE_DETAILS)
+        render(characterItemView)
 
     }
 
-    private fun render(peoplesItemView: PeoplesItemView?) {
-        initViewDataBundle(peoplesItemView)
+    private fun render(characterItemView: CharacterItemView?) {
+        initViewDataBundle(characterItemView)
 
-        peoplesItemView?.homeWorld?.let { it ->
+        characterItemView?.homeWorld?.let { it ->
             viewModel.getNameAttr(it, CONSTANT_ATTRIBUTE_HOME_WORLD){ name->
                 binding.homeWorld.text = name
             }
         }
     }
 
-    private fun initViewDataBundle(peoplesItemView: PeoplesItemView?) {
-        binding.nameCharacter.text = peoplesItemView?.name
-        peoplesItemView?.height?.let { binding.height.text = it }
-        peoplesItemView?.mass?.let { binding.mass.text = it }
-        peoplesItemView?.hairColor?.let { binding.hairColor.text = it }
-        peoplesItemView?.skinColor?.let { binding.skinColor.text = it }
-        peoplesItemView?.eyeColor?.let { binding.eyeColor.text = it }
-        peoplesItemView?.birthYear?.let { binding.birthYear.text = it }
-        peoplesItemView?.gender?.let { binding.gender.text = it }
+    private fun initViewDataBundle(characterItemView: CharacterItemView?) {
+        binding.nameCharacter.text = characterItemView?.name
+        characterItemView?.height?.let { binding.height.text = it }
+        characterItemView?.mass?.let { binding.mass.text = it }
+        characterItemView?.hairColor?.let { binding.hairColor.text = it }
+        characterItemView?.skinColor?.let { binding.skinColor.text = it }
+        characterItemView?.eyeColor?.let { binding.eyeColor.text = it }
+        characterItemView?.birthYear?.let { binding.birthYear.text = it }
+        characterItemView?.gender?.let { binding.gender.text = it }
     }
 
     companion object {
         private const val BUNDLE_DETAILS = "key_bundle_details"
-        fun bundleDetails(peoplesItemView: PeoplesItemView): Bundle {
+        fun bundleDetails(characterItemView: CharacterItemView): Bundle {
             return Bundle().apply {
-                putParcelable(BUNDLE_DETAILS, peoplesItemView)
+                putParcelable(BUNDLE_DETAILS, characterItemView)
             }
         }
 

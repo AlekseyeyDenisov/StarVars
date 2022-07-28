@@ -5,8 +5,8 @@ import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.data.room.HelperRooDetails
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.domain.RepositoryDetails
 import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
-import ru.dw.starvars.viewmodel.details.RepositoryDetails
 
 
 class RepositoryDetailsIpl : RepositoryDetails {

@@ -1,8 +1,8 @@
 package ru.dw.starvars
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.dw.starvars.view.list.ListPeoplesFragment
+import androidx.appcompat.app.AppCompatActivity
+import ru.dw.starvars.view.list.ListCharactersFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ListPeoplesFragment.newInstance()).commit()
+                .replace(R.id.container, ListCharactersFragment.newInstance()).commit()
         }
     }
 

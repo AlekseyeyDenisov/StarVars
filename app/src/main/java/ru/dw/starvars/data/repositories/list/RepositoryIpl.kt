@@ -2,22 +2,21 @@ package ru.dw.starvars.data.repositories.list
 
 import androidx.lifecycle.LiveData
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.HelperRoomPeople
-import ru.dw.starvars.data.room.entity.PeoplesEntity
-
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
-import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
-import ru.dw.starvars.viewmodel.list.RepositoryList
+import ru.dw.starvars.data.room.HelperRoomCharacter
+import ru.dw.starvars.data.room.entity.CharactersEntity
+import ru.dw.starvars.domain.RepositoryList
+import ru.dw.starvars.domain.model.CharactersListResponsePojo
+import ru.dw.starvars.viewmodel.list.ListCharactersViewModel
 
 
 class RepositoryIpl : RepositoryList, DataBaseListLocal {
     private val dataApi: ApiRetrofitListInterface = RetrofitApiStarWars
-    private val dataRoom:DataBaseListLocal = HelperRoomPeople()
+    private val dataRoom:DataBaseListLocal = HelperRoomCharacter()
 
-    override fun getAllPeoples(): LiveData<List<PeoplesEntity>> = dataRoom.getAllPeoples()
+    override fun getAllCharacters(): LiveData<List<CharactersEntity>> = dataRoom.getAllCharacters()
 
-    override fun insertDatabasePeoples(pogo: PeoplesListResponsePojo) {
-        dataRoom.insertDatabasePeoples(pogo)
+    override fun insertDatabaseCharacters(pogo: CharactersListResponsePojo) {
+        dataRoom.insertDatabaseCharacters(pogo)
     }
 
     override fun refresh() = dataRoom.refresh()
@@ -25,12 +24,12 @@ class RepositoryIpl : RepositoryList, DataBaseListLocal {
 
     override fun getRequestUrl(
         url: String,
-        responseCallBack: ListPeoplesViewModel.ResponseCallBackViewModel
+        responseCallBack: ListCharactersViewModel.ResponseCallBackViewModel
     ) {
-        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.CallBackRetrofit<PeoplesListResponsePojo> {
+        dataApi.getListRequestUrl(url, object : RetrofitApiStarWars.CallBackRetrofit<CharactersListResponsePojo> {
 
-            override fun success(pogo: PeoplesListResponsePojo) {
-                insertDatabasePeoples(pogo)
+            override fun success(pogo: CharactersListResponsePojo) {
+                insertDatabaseCharacters(pogo)
             }
 
             override fun error(error: String) {

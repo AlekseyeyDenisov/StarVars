@@ -13,31 +13,31 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.dw.starvars.R
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.utils.NetworkUtil
-import ru.dw.starvars.utils.START_PEOPLES_LIST_URL
+import ru.dw.starvars.utils.START_CHAPTERS_LIST_URL
 import ru.dw.starvars.utils.SharedPreferencesManager
 import ru.dw.starvars.view.details.DetailsFragment
-import ru.dw.starvars.view.list.recycler.AdapterRecyclerListPeoples
+import ru.dw.starvars.view.list.recycler.AdapterRecyclerListCharacters
 import ru.dw.starvars.view.list.recycler.OnItemClickListener
-import ru.dw.starvars.viewmodel.list.ListPeoplesViewModel
+import ru.dw.starvars.viewmodel.list.ListCharactersViewModel
 
-class ListPeoplesFragment : Fragment(), OnItemClickListener {
+class ListCharactersFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
 
     companion object {
-        fun newInstance() = ListPeoplesFragment()
+        fun newInstance() = ListCharactersFragment()
     }
 
     private var _binding: FragmentListPeoplsBinding? = null
     private val binding get() = _binding!!
-    private var listRecycler: List<PeoplesItemView> = ArrayList()
+    private var listRecycler: List<CharacterItemView> = ArrayList()
 
-    private val viewModel: ListPeoplesViewModel by lazy {
-        ViewModelProvider(this)[ListPeoplesViewModel::class.java]
+    private val viewModel: ListCharactersViewModel by lazy {
+        ViewModelProvider(this)[ListCharactersViewModel::class.java]
     }
 
-    private val adapterRecyclerListPeoples = AdapterRecyclerListPeoples(this)
+    private val adapterRecyclerListCharacters = AdapterRecyclerListCharacters(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,19 +59,19 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         firstStart()
         initObserve()
-        initRecycler(binding.listPeopleRecyclerView)
+        initRecycler(binding.listChapterRecyclerView)
 
     }
 
     private fun initRecycler(listPeopleRecyclerView: RecyclerView) {
         with(listPeopleRecyclerView) {
-            adapter = adapterRecyclerListPeoples
+            adapter = adapterRecyclerListCharacters
         }
     }
 
     private fun firstStart() {
         if (pref.getFirstStart()) {
-            viewModel.requestUrl(START_PEOPLES_LIST_URL)
+            viewModel.requestUrl(START_CHAPTERS_LIST_URL)
         }
     }
 
@@ -90,11 +90,11 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
             }
             is ListState.Success -> {
-                if (state.peopleList.isNotEmpty())
+                if (state.chapterList.isNotEmpty())
                     visibilityProgress(false)
 
-                listRecycler = state.peopleList
-                adapterRecyclerListPeoples.submitList(state.peopleList)
+                listRecycler = state.chapterList
+                adapterRecyclerListCharacters.submitList(state.chapterList)
             }
             is ListState.Error -> {
                 visibilityProgress(false)
@@ -110,8 +110,8 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
 
     }
 
-    override fun onItemClick(peoplesItemView: PeoplesItemView) {
-        val bundle = DetailsFragment.bundleDetails(peoplesItemView)
+    override fun onItemClick(characterItemView: CharacterItemView) {
+        val bundle = DetailsFragment.bundleDetails(characterItemView)
 
         if (isOnePanelMode()){
             launchFragment(DetailsFragment.newInstance(bundle),R.id.container)
@@ -137,9 +137,9 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
             .commit()
     }
 
-    override fun onItemClickLoadMore(peoplesItemView: PeoplesItemView) {
+    override fun onItemClickLoadMore(characterItemView: CharacterItemView) {
         if (icConnect())
-            peoplesItemView.nextPage?.let {
+            characterItemView.nextPage?.let {
                 viewModel.requestUrl(it)
             }
         else Toast.makeText(
@@ -169,7 +169,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
                 val mutableListData = filterData.toMutableList()
                 mutableListData.add(lastItem)
 
-                adapterRecyclerListPeoples.submitList(mutableListData)
+                adapterRecyclerListCharacters.submitList(mutableListData)
                 return true
             }
         })
@@ -183,7 +183,7 @@ class ListPeoplesFragment : Fragment(), OnItemClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
                     viewModel.refresh()
                     launch(Dispatchers.Main) {
-                        viewModel.requestUrl(START_PEOPLES_LIST_URL)
+                        viewModel.requestUrl(START_CHAPTERS_LIST_URL)
                     }
                 }
             }

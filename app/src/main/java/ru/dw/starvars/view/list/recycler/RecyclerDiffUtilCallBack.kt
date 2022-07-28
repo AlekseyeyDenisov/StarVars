@@ -1,16 +1,16 @@
 package ru.dw.starvars.view.list.recycler
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.domain.model.CharacterItemView
 
-class RecyclerDiffUtilCallBack : DiffUtil.ItemCallback<PeoplesItemView>() {
-    override fun areItemsTheSame(oldItem: PeoplesItemView, newItem: PeoplesItemView): Boolean {
+class RecyclerDiffUtilCallBack : DiffUtil.ItemCallback<CharacterItemView>() {
+    override fun areItemsTheSame(oldItem: CharacterItemView, newItem: CharacterItemView): Boolean {
         return oldItem.homeWorld == newItem.homeWorld
     }
 
     override fun areContentsTheSame(
-        oldItem: PeoplesItemView,
-        newItem: PeoplesItemView
+        oldItem: CharacterItemView,
+        newItem: CharacterItemView
     ): Boolean {
         return oldItem == newItem
     }

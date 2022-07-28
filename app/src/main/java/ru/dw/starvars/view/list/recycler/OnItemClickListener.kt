@@ -1,8 +1,8 @@
 package ru.dw.starvars.view.list.recycler
 
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.domain.model.CharacterItemView
 
 interface OnItemClickListener {
-    fun onItemClick(peoplesItemView: PeoplesItemView)
-    fun onItemClickLoadMore(peoplesItemView: PeoplesItemView)
+    fun onItemClick(characterItemView: CharacterItemView)
+    fun onItemClickLoadMore(characterItemView: CharacterItemView)
 }

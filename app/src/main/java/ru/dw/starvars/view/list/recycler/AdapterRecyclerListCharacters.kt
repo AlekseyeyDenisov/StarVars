@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ru.dw.starvars.databinding.ItemLoadMoreRecyclerBinding
 import ru.dw.starvars.databinding.ItemRecyclerBinding
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
 import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
 
-class AdapterRecyclerListPeoples(
+class AdapterRecyclerListCharacters(
     private val onItemClickListener: OnItemClickListener
-) : ListAdapter<PeoplesItemView, AdapterRecyclerListPeoples.ViewHolderPeopleItem>(
+) : ListAdapter<CharacterItemView, AdapterRecyclerListCharacters.ViewHolderChapterItem>(
     RecyclerDiffUtilCallBack()
 ) {
 
@@ -22,7 +22,7 @@ class AdapterRecyclerListPeoples(
         return data.viewTape
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPeopleItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderChapterItem {
         val layout = when (viewType) {
             VIEW_TAPE_CHARACTER -> {
                 ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,31 +36,31 @@ class AdapterRecyclerListPeoples(
             }
             else -> throw RuntimeException("Unknown view type: $viewType")
         }
-        return ViewHolderPeopleItem(layout)
+        return ViewHolderChapterItem(layout)
     }
 
-    override fun onBindViewHolder(holder: ViewHolderPeopleItem, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderChapterItem, position: Int) {
         val item = getItem(position)
-        if (item.viewTape == VIEW_TAPE_CHARACTER) holder.bindPeople(item)
+        if (item.viewTape == VIEW_TAPE_CHARACTER) holder.bindChapter(item)
         else holder.binLoadMore(item)
     }
 
-    inner class ViewHolderPeopleItem(viewBinding: ViewBinding) :
+    inner class ViewHolderChapterItem(viewBinding: ViewBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
-        fun bindPeople(peoplesItemView: PeoplesItemView) {
+        fun bindChapter(characterItemView: CharacterItemView) {
             ItemRecyclerBinding.bind(itemView).apply {
-                nameCharacter.text = peoplesItemView.name
+                nameCharacter.text = characterItemView.name
                 root.setOnClickListener {
-                    onItemClickListener.onItemClick(peoplesItemView)
+                    onItemClickListener.onItemClick(characterItemView)
                 }
             }
         }
 
-        fun binLoadMore(peoplesItemView: PeoplesItemView) {
+        fun binLoadMore(characterItemView: CharacterItemView) {
             ItemLoadMoreRecyclerBinding.bind(itemView).root.apply {
                 setOnClickListener {
-                    onItemClickListener.onItemClickLoadMore(peoplesItemView)
+                    onItemClickListener.onItemClickLoadMore(characterItemView)
                 }
             }
 

@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.domain.model.CharactersListResponsePojo
 import ru.dw.starvars.utils.BASE_URL
 
 
@@ -23,11 +23,11 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
 
     override fun getListRequestUrl(
         url: String,
-        genericCallBackRetrofit: CallBackRetrofit<PeoplesListResponsePojo>
+        genericCallBackRetrofit: CallBackRetrofit<CharactersListResponsePojo>
     ) {
-        val callBackUrl = CallBackUrl<PeoplesListResponsePojo>()
+        val callBackUrl = CallBackUrl<CharactersListResponsePojo>()
         retrofit
-            .getUrlPeoplesResponse(url)
+            .getUrlChaptersResponse(url)
             .enqueue(
                 callBackUrl.callback(genericCallBackRetrofit)
             )

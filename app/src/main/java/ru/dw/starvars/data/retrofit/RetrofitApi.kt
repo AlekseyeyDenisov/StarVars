@@ -4,12 +4,12 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.domain.model.PeoplesListResponsePojo
+import ru.dw.starvars.domain.model.CharactersListResponsePojo
 
 
 interface RetrofitApi {
     @GET
-    fun getUrlPeoplesResponse(@Url url: String): Call<PeoplesListResponsePojo>
+    fun getUrlChaptersResponse(@Url url: String): Call<CharactersListResponsePojo>
 
     @GET
     fun getUrlPlanetResponse(@Url url: String): Call<PlanetsPojo>

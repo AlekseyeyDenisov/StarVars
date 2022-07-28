@@ -2,46 +2,42 @@ package ru.dw.starvars.utils
 
 
 
-import ru.dw.starvars.data.room.entity.PeoplesEntity
-import ru.dw.starvars.domain.model.PeoplesItemView
+import ru.dw.starvars.data.room.entity.CharactersEntity
+import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.domain.model.ResultsItem
 
 
 const val BASE_URL = "https://swapi.dev/api/"
-const val START_PEOPLES_LIST_URL = "https://swapi.dev/api/people/"
-const val CONSTANT_ATTRIBUTE_FILMS = "films"
-const val CONSTANT_ATTRIBUTE_VEHICLES = "vehicles"
-const val CONSTANT_ATTRIBUTE_STARSHIPS = "starships"
-const val CONSTANT_ATTRIBUTE_SPECIES = "species"
+const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
 const val CONSTANT_ATTRIBUTE_HOME_WORLD = "homeworld"
 
-const val CONSTANT_TABLE_PEOPLES = "peoples"
+const val CONSTANT_TABLE_CHAPTERS = "chapters"
 const val VIEW_TAPE_CHARACTER = 1
 const val VIEW_TAPE_LOAD_MORE = 0
 
 
-fun mapperPeoplesEntityToPeoplesItemView(peoplesEntity: PeoplesEntity): PeoplesItemView {
-    return PeoplesItemView(
-        peoplesEntity.id,
-        peoplesEntity.homeWorld,
-        peoplesEntity.gender,
-        peoplesEntity.skinColor,
-        peoplesEntity.edited,
-        peoplesEntity.created,
-        peoplesEntity.mass,
-        peoplesEntity.url,
-        peoplesEntity.hairColor,
-        peoplesEntity.birthYear,
-        peoplesEntity.eyeColor,
-        peoplesEntity.name,
-        peoplesEntity.height,
-        peoplesEntity.viewTape,
-        peoplesEntity.nextPage
+fun mapperPeoplesEntityToPeoplesItemView(charactersEntity: CharactersEntity): CharacterItemView {
+    return CharacterItemView(
+        charactersEntity.id,
+        charactersEntity.homeWorld,
+        charactersEntity.gender,
+        charactersEntity.skinColor,
+        charactersEntity.edited,
+        charactersEntity.created,
+        charactersEntity.mass,
+        charactersEntity.url,
+        charactersEntity.hairColor,
+        charactersEntity.birthYear,
+        charactersEntity.eyeColor,
+        charactersEntity.name,
+        charactersEntity.height,
+        charactersEntity.viewTape,
+        charactersEntity.nextPage
     )
 }
 
-fun convertPogoToEntity(resultsItem: ResultsItem): PeoplesEntity {
-    return PeoplesEntity(
+fun convertPogoToEntity(resultsItem: ResultsItem): CharactersEntity {
+    return CharactersEntity(
         0,
         resultsItem.homeWorld,
         resultsItem.gender,

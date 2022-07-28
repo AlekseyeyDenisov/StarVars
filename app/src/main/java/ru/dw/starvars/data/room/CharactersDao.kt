@@ -3,25 +3,25 @@ package ru.dw.starvars.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ru.dw.starvars.data.room.entity.PeoplesEntity
+import ru.dw.starvars.data.room.entity.CharactersEntity
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
 
 @Dao
-interface PeoplesDao {
+interface CharactersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(peoplesEntity: PeoplesEntity): Long
+    fun insert(charactersEntity: CharactersEntity): Long
 
     @Update
-    fun update(peoplesEntity: PeoplesEntity): Int
+    fun update(charactersEntity: CharactersEntity): Int
 
-    @Query("SELECT * FROM peoples ")
-    fun getAll(): LiveData<List<PeoplesEntity>>
+    @Query("SELECT * FROM chapters  ")
+    fun getAll(): LiveData<List<CharactersEntity>>
 
-    @Query("DELETE  FROM peoples WHERE viewTape =:viewTape")
+    @Query("DELETE  FROM chapters WHERE viewTape =:viewTape")
     fun deleteNextPage(viewTape:Int)
 
-    @Query("DELETE  FROM peoples")
+    @Query("DELETE  FROM chapters")
     fun deleteAll():Int
 
 }

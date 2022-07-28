@@ -2,7 +2,7 @@ package ru.dw.starvars.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PeoplesListResponsePojo(
+data class CharactersListResponsePojo(
 
 	@field:SerializedName("next")
 	val next: String? = null,
