@@ -12,7 +12,7 @@ import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
 import ru.dw.starvars.viewmodel.details.DetailsViewModel
 
-
+//test git
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
