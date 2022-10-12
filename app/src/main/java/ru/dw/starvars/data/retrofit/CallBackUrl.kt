@@ -24,7 +24,10 @@ class CallBackUrl<T> {
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                t.message?.let { responseGeneric.error(it) }
+
+                t.message?.let {
+                    responseGeneric.error(it)
+                }
 
             }
 

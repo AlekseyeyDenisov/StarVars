@@ -15,18 +15,18 @@ import ru.dw.starvars.R
 import ru.dw.starvars.data.SharedPreferencesManager
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
-import ru.dw.starvars.utils.NetworkUtil
 import ru.dw.starvars.pressentation.view.details.DetailsFragment
 import ru.dw.starvars.pressentation.view.list.recycler.AdapterRecyclerListCharacters
 import ru.dw.starvars.pressentation.view.list.recycler.OnItemClickListener
-import ru.dw.starvars.pressentation.view.list.list.ListCharactersViewModel
+import ru.dw.starvars.utils.NetworkUtil
 
 class ListCharactersFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
 
     companion object {
         fun newInstance() = ListCharactersFragment()
-        private const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
+       private const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
+
     }
 
     private var _binding: FragmentListPeoplsBinding? = null
@@ -49,17 +49,13 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
-    override fun onResume() {
-        setHasOptionsMenu(true)
-        super.onResume()
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        initRecycler(binding.listChapterRecyclerView)
         firstStart()
         initObserve()
-        initRecycler(binding.listChapterRecyclerView)
 
     }
 
@@ -71,14 +67,16 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
 
     private fun firstStart() {
         if (pref.getFirstStart()) {
-            viewModel.requestUrl(START_CHAPTERS_LIST_URL)
+            if (isConnectInternet()) {
+                viewModel.requestUrl(START_CHAPTERS_LIST_URL)
+                pref.setFirstStart(false)
+            }
         }
     }
 
     private fun initObserve() {
         viewModel.getLivedata().observe(viewLifecycleOwner) { state ->
             renderData(state)
-            if (pref.getFirstStart()) pref.setFirstStart(false)
         }
     }
 
@@ -113,14 +111,15 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(characterItemView: CharacterItemView) {
         val bundle = DetailsFragment.bundleDetails(characterItemView)
 
-        if (isOnePanelMode()){
-            launchFragment(DetailsFragment.newInstance(bundle),R.id.container)
+        if (isOnePanelMode()) {
+            launchFragment(DetailsFragment.newInstance(bundle), R.id.container)
 
 
-        }else{
-            launchFragment(DetailsFragment.newInstance(bundle),R.id.detailsContainer)
+        } else {
+            launchFragment(DetailsFragment.newInstance(bundle), R.id.detailsContainer)
         }
     }
+
     private fun launchFragment(fragment: Fragment, containerId: Int) {
         requireActivity().supportFragmentManager.popBackStack()
         requireActivity().supportFragmentManager
@@ -131,22 +130,17 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
                 R.anim.enter_left_to_right,
                 R.anim.exit_left_to_right,
 
-            )
+                )
             .add(containerId, fragment)
             .addToBackStack(null)
             .commit()
     }
 
     override fun onItemClickLoadMore(characterItemView: CharacterItemView) {
-        if (icConnect())
+        if (isConnectInternet())
             characterItemView.nextPage?.let {
                 viewModel.requestUrl(it)
             }
-        else Toast.makeText(
-            requireContext(),
-            getString(R.string.no_internet_connection),
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -179,11 +173,13 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.refresh -> {
-                visibilityProgress(true)
-                lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.refresh()
-                    launch(Dispatchers.Main) {
-                        viewModel.requestUrl(START_CHAPTERS_LIST_URL)
+                if (isConnectInternet()) {
+                    visibilityProgress(true)
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        viewModel.refresh()
+                        launch(Dispatchers.Main) {
+                            viewModel.requestUrl(START_CHAPTERS_LIST_URL)
+                        }
                     }
                 }
             }
@@ -191,12 +187,12 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
         return false
     }
 
-    private fun isOnePanelMode():Boolean{
+    private fun isOnePanelMode(): Boolean {
         return binding.detailsContainer == null
     }
 
 
-    private fun icConnect(): Boolean {
+    private fun isConnectInternet(): Boolean {
         return NetworkUtil.getConnectivityStatusString(requireContext())
     }
 

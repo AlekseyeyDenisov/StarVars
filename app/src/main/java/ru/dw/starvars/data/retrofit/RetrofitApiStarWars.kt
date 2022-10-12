@@ -45,6 +45,7 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
                 callBackUrl.callback(genericCallBackRetrofit)
             )
 
+
     }
 
 

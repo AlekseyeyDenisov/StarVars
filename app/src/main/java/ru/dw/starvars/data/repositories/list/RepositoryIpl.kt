@@ -11,7 +11,6 @@ import ru.dw.starvars.domain.RepositoryList
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
 import ru.dw.starvars.domain.model.ResultsItem
-import ru.dw.starvars.pressentation.view.list.list.ListCharactersViewModel
 import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
 
 
@@ -36,10 +35,7 @@ class RepositoryIpl : RepositoryList, DataBaseListLocal {
     }
 
 
-    override fun getRequestUrl(
-        url: String,
-        responseCallBack: ListCharactersViewModel.ResponseCallBackViewModel
-    ) {
+    override fun getRequestUrl(url: String, requestError: (String) -> Unit) {
         dataApi.getListRequestUrl(
             url,
             object : RetrofitApiStarWars.CallBackRetrofit<CharactersListResponsePojo> {
@@ -49,7 +45,7 @@ class RepositoryIpl : RepositoryList, DataBaseListLocal {
                 }
 
                 override fun error(error: String) {
-                    responseCallBack.error(error)
+                    requestError(error)
                 }
             })
     }

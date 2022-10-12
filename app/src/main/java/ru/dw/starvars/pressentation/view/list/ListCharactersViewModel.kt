@@ -1,16 +1,15 @@
-package ru.dw.starvars.pressentation.view.list.list
+package ru.dw.starvars.pressentation.view.list
 
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.dw.starvars.data.mapper.DataMapper
 import ru.dw.starvars.data.repositories.list.RepositoryIpl
 import ru.dw.starvars.domain.cases.GetAllCharacterCase
 import ru.dw.starvars.domain.cases.GetListCharacterCase
 import ru.dw.starvars.domain.cases.RefreshListCharacterCase
 import ru.dw.starvars.domain.model.CharacterItemView
-import ru.dw.starvars.pressentation.view.list.ListState
 
 
 class ListCharactersViewModel : ViewModel() {
@@ -24,39 +23,29 @@ class ListCharactersViewModel : ViewModel() {
         observeRoom()
     }
 
-    fun refresh() = refreshChaptersListCase.invoke()
-
     private fun observeRoom() {
-        getAllCharacterCase.invoke().observeForever { list ->
-            val listItemView = mutableListOf<CharacterItemView>()
-            list.forEach { entity ->
-                listItemView.add(entity)
+        liveData = MediatorLiveData<ListState>().apply {
+            getAllCharacterCase.invoke().observeForever { list ->
+                val listItemView = mutableListOf<CharacterItemView>()
+                list.forEach { entity ->
+                    listItemView.add(entity)
+                }
+                postValue(ListState.Success(listItemView))
             }
-            liveData.postValue(ListState.Success(listItemView))
         }
     }
 
+    fun refresh() = refreshChaptersListCase.invoke()
 
     fun getLivedata(): LiveData<ListState> = liveData
 
     fun requestUrl(url: String) {
         liveData.value = ListState.Loading
+        getChaptersListCase.invoke(url) { error ->
+            liveData.postValue(ListState.Error(error))
 
-        getChaptersListCase.invoke(url,  object : ResponseCallBackViewModel {
-            override fun success(listCharacterItemView: List<CharacterItemView>) {
-                liveData.postValue(ListState.Success(listCharacterItemView))
+        }
 
-            }
-            override fun error(error: String) {
-                liveData.postValue(ListState.Error(error))
-            }
-        })
-
-    }
-
-    interface ResponseCallBackViewModel {
-        fun success(listCharacterItemView: List<CharacterItemView>)
-        fun error(error: String)
     }
 
 }
