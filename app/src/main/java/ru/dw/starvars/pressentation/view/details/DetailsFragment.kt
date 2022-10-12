@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.details
+package ru.dw.starvars.pressentation.view.details
 
 
 import android.os.Bundle
@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
-import ru.dw.starvars.utils.CONSTANT_ATTRIBUTE_HOME_WORLD
-import ru.dw.starvars.viewmodel.details.DetailsViewModel
+import ru.dw.starvars.pressentation.view.details.details.DetailsViewModel
 
 //test git
 class DetailsFragment : Fragment() {
@@ -21,6 +20,8 @@ class DetailsFragment : Fragment() {
     private val viewModel: DetailsViewModel by lazy {
         ViewModelProvider(this)[DetailsViewModel::class.java]
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +62,7 @@ class DetailsFragment : Fragment() {
 
     companion object {
         private const val BUNDLE_DETAILS = "key_bundle_details"
+        const val CONSTANT_ATTRIBUTE_HOME_WORLD = "homeworld"
         fun bundleDetails(characterItemView: CharacterItemView): Bundle {
             return Bundle().apply {
                 putParcelable(BUNDLE_DETAILS, characterItemView)

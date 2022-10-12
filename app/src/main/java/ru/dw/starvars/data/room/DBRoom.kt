@@ -2,13 +2,13 @@ package ru.dw.starvars.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.dw.starvars.data.room.entity.CharactersEntity
+import ru.dw.starvars.data.room.entity.CharactersDBModel
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
 
 
 @Database(
     entities = [
-        CharactersEntity::class,
+        CharactersDBModel::class,
         ValueAttrEntity::class
     ], version = 1
 )

@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.list
+package ru.dw.starvars.pressentation.view.list
 
 import ru.dw.starvars.domain.model.CharacterItemView
 

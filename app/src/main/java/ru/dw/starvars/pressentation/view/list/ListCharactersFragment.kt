@@ -1,4 +1,4 @@
-package ru.dw.starvars.view.list
+package ru.dw.starvars.pressentation.view.list
 
 
 import android.os.Bundle
@@ -12,21 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.dw.starvars.R
+import ru.dw.starvars.data.SharedPreferencesManager
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.utils.NetworkUtil
-import ru.dw.starvars.utils.START_CHAPTERS_LIST_URL
-import ru.dw.starvars.utils.SharedPreferencesManager
-import ru.dw.starvars.view.details.DetailsFragment
-import ru.dw.starvars.view.list.recycler.AdapterRecyclerListCharacters
-import ru.dw.starvars.view.list.recycler.OnItemClickListener
-import ru.dw.starvars.viewmodel.list.ListCharactersViewModel
+import ru.dw.starvars.pressentation.view.details.DetailsFragment
+import ru.dw.starvars.pressentation.view.list.recycler.AdapterRecyclerListCharacters
+import ru.dw.starvars.pressentation.view.list.recycler.OnItemClickListener
+import ru.dw.starvars.pressentation.view.list.list.ListCharactersViewModel
 
 class ListCharactersFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
 
     companion object {
         fun newInstance() = ListCharactersFragment()
+        private const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
     }
 
     private var _binding: FragmentListPeoplsBinding? = null

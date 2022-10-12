@@ -1,4 +1,4 @@
-package ru.dw.starvars.utils
+package ru.dw.starvars.data
 
 import android.content.Context
 import android.content.SharedPreferences

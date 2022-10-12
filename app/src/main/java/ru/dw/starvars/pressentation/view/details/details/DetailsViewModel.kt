@@ -1,4 +1,4 @@
-package ru.dw.starvars.viewmodel.details
+package ru.dw.starvars.pressentation.view.details.details
 
 import android.os.Handler
 import android.os.Looper

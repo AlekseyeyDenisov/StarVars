@@ -1,16 +1,16 @@
-package ru.dw.starvars.viewmodel.list
+package ru.dw.starvars.pressentation.view.list.list
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.dw.starvars.data.mapper.DataMapper
 import ru.dw.starvars.data.repositories.list.RepositoryIpl
 import ru.dw.starvars.domain.cases.GetAllCharacterCase
 import ru.dw.starvars.domain.cases.GetListCharacterCase
 import ru.dw.starvars.domain.cases.RefreshListCharacterCase
 import ru.dw.starvars.domain.model.CharacterItemView
-import ru.dw.starvars.utils.mapperPeoplesEntityToPeoplesItemView
-import ru.dw.starvars.view.list.ListState
+import ru.dw.starvars.pressentation.view.list.ListState
 
 
 class ListCharactersViewModel : ViewModel() {
@@ -30,7 +30,7 @@ class ListCharactersViewModel : ViewModel() {
         getAllCharacterCase.invoke().observeForever { list ->
             val listItemView = mutableListOf<CharacterItemView>()
             list.forEach { entity ->
-                listItemView.add(mapperPeoplesEntityToPeoplesItemView(entity))
+                listItemView.add(entity)
             }
             liveData.postValue(ListState.Success(listItemView))
         }

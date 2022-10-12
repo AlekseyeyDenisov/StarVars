@@ -7,11 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
-import ru.dw.starvars.utils.BASE_URL
+
 
 
 object RetrofitApiStarWars : ApiRetrofitListInterface {
     private val retrofit: RetrofitApi = initRetrofit()
+    private const val BASE_URL = "https://swapi.dev/api/"
 
     private fun initRetrofit(): RetrofitApi {
         return Retrofit.Builder().apply {
@@ -51,5 +52,7 @@ object RetrofitApiStarWars : ApiRetrofitListInterface {
         fun success(pogo: T)
         fun error(error: String)
     }
+
+
 
 }

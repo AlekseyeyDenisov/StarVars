@@ -4,12 +4,13 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import ru.dw.starvars.utils.CONSTANT_TABLE_CHAPTERS
 import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
+
+private const val CONSTANT_TABLE_CHAPTERS = "chapters"
 
 @Parcelize
 @Entity(tableName = CONSTANT_TABLE_CHAPTERS)
-data class CharactersEntity(
+data class CharactersDBModel(
     @PrimaryKey(autoGenerate = true)
     val id:Long,
     val homeWorld: String? = null,

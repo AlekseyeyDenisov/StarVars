@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    tools:context=".view.details.DetailsFragment">
+    tools:context=".pressentation.view.details.DetailsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/nameCharacter"
