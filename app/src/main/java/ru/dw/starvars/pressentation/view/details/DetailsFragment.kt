@@ -11,7 +11,7 @@ import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.pressentation.view.details.details.DetailsViewModel
 
-//test git
+
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
