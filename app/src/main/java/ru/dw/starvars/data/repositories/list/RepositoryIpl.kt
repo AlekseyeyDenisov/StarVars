@@ -50,8 +50,7 @@ class RepositoryIpl : RepositoryList, DataBaseListLocal {
             })
     }
 
-    private fun insertDatabaseCharacters(pogo: CharactersListResponsePojo) {//TODO("Переделать на coroutine")
-
+    private fun insertDatabaseCharacters(pogo: CharactersListResponsePojo) {
         Thread {
             db.chaptersDao().deleteNextPage(VIEW_TAPE_LOAD_MORE)
 
