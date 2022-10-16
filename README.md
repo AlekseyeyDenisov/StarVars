@@ -1,4 +1,4 @@
-Программа получает по Ip список записывает в базу и выводит на экран <br>
+Программа получает по API список записывает в базу и выводит на экран <br>
 Архетектура MVVM<br>
 Retrofit<br>
 Room<br>
@@ -10,7 +10,6 @@ Dagger<br>
 
 ![Screenshot_20220728_111817](https://user-images.githubusercontent.com/92829426/181457518-9f27394a-904c-4ca3-a770-cdf70199b3a6.jpg)
 
-![Screenshot_20220728_111852](https://user-images.githubusercontent.com/92829426/181457684-7c92362d-7a62-4083-8aa4-ee2c69b5005e.jpg)
 
 # StarVars
 
