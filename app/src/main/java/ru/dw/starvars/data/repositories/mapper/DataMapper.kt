@@ -1,6 +1,6 @@
-package ru.dw.starvars.data.mapper
+package ru.dw.starvars.data.repositories.mapper
 
-import ru.dw.starvars.data.room.entity.CharactersDBModel
+import ru.dw.starvars.data.database.entity.CharactersDBModel
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.domain.model.ResultsItem
 import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER

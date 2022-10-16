@@ -1,29 +1,24 @@
-package ru.dw.starvars.data.retrofit
+package ru.dw.starvars.data.api
 
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
-import ru.dw.starvars.data.retrofit.model.PlanetsPojo
+import ru.dw.starvars.data.api.model.PlanetsPojo
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
 import javax.inject.Inject
 
 
-class RetrofitApiStarWars @Inject constructor() : ApiRetrofitListInterface {
-    private val retrofit: RetrofitApi = initRetrofit()
-    companion object {
-        private const val BASE_URL = "https://swapi.dev/api/"
-    }
+class ApiService @Inject constructor() : ApiRetrofitListInterface {
 
-
-    private fun initRetrofit(): RetrofitApi {
-        return Retrofit.Builder().apply {
+    private val retrofit: RetrofitApi =
+        Retrofit.Builder().apply {
             baseUrl(BASE_URL)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         }.build()
             .create(RetrofitApi::class.java)
-    }
+
 
     override fun getListRequestUrl(
         url: String,
@@ -35,6 +30,7 @@ class RetrofitApiStarWars @Inject constructor() : ApiRetrofitListInterface {
             .enqueue(
                 callBackUrl.callback(genericCallBackRetrofit)
             )
+
     }
 
     fun getPlanetRequestUrl(
@@ -57,6 +53,8 @@ class RetrofitApiStarWars @Inject constructor() : ApiRetrofitListInterface {
         fun error(error: String)
     }
 
-
+    companion object {
+        private const val BASE_URL = "https://swapi.dev/api/"
+    }
 
 }

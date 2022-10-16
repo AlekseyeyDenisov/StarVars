@@ -8,9 +8,8 @@ import dagger.Provides
 import ru.dw.starvars.data.repositories.details.RepositoryDetailsIpl
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.repositories.list.RepositoryListIpl
-import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.AppDataBase
-import ru.dw.starvars.data.room.CharactersDao
+import ru.dw.starvars.data.api.ApiService
+import ru.dw.starvars.data.database.AppDataBase
 import ru.dw.starvars.domain.RepositoryDetails
 import ru.dw.starvars.domain.RepositoryList
 
@@ -25,7 +24,7 @@ interface DataModule {
 
 
     @Binds
-    fun ApiRetrofitListInterface(impl: RetrofitApiStarWars): ApiRetrofitListInterface
+    fun ApiRetrofitListInterface(impl: ApiService): ApiRetrofitListInterface
 
     companion object {
         @Provides

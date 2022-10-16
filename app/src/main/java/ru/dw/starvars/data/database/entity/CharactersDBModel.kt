@@ -1,4 +1,4 @@
-package ru.dw.starvars.data.room.entity
+package ru.dw.starvars.data.database.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

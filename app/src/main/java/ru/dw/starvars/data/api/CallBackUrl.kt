@@ -1,11 +1,11 @@
-package ru.dw.starvars.data.retrofit
+package ru.dw.starvars.data.api
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CallBackUrl<T> {
-    fun callback(responseGeneric: RetrofitApiStarWars.CallBackRetrofit<T>): Callback<T> {
+    fun callback(responseGeneric: ApiService.CallBackRetrofit<T>): Callback<T> {
         return object : Callback<T> {
             override fun onResponse(
                 call: Call<T>,

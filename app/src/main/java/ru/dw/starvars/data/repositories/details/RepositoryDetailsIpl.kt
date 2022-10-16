@@ -1,10 +1,10 @@
 package ru.dw.starvars.data.repositories.details
 
 
-import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.data.room.AppDataBase
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.data.api.ApiService
+import ru.dw.starvars.data.api.model.PlanetsPojo
+import ru.dw.starvars.data.database.AppDataBase
+import ru.dw.starvars.data.database.entity.ValueAttrEntity
 import ru.dw.starvars.domain.RepositoryDetails
 import ru.dw.starvars.pressentation.view.details.DetailsFragment.Companion.CONSTANT_ATTRIBUTE_HOME_WORLD
 import javax.inject.Inject
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class RepositoryDetailsIpl @Inject constructor(
     private val dbDao: AppDataBase,
-    private val dataApi : RetrofitApiStarWars
+    private val dataApi : ApiService
 ) : RepositoryDetails {
 
 
@@ -38,7 +38,7 @@ class RepositoryDetailsIpl @Inject constructor(
     private fun getIpiPlanet(url: String, name: (String) -> Unit) {
         dataApi.getPlanetRequestUrl(
             url,
-            object : RetrofitApiStarWars.CallBackRetrofit<PlanetsPojo> {
+            object : ApiService.CallBackRetrofit<PlanetsPojo> {
                 override fun success(pogo: PlanetsPojo) {
 
                     pogo.name?.let { valueName ->

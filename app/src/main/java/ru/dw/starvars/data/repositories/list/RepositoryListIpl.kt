@@ -2,10 +2,10 @@ package ru.dw.starvars.data.repositories.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import ru.dw.starvars.data.mapper.DataMapper
-import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.AppDataBase
-import ru.dw.starvars.data.room.entity.CharactersDBModel
+import ru.dw.starvars.data.repositories.mapper.DataMapper
+import ru.dw.starvars.data.api.ApiService
+import ru.dw.starvars.data.database.AppDataBase
+import ru.dw.starvars.data.database.entity.CharactersDBModel
 import ru.dw.starvars.domain.RepositoryList
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
@@ -42,7 +42,7 @@ class RepositoryListIpl @Inject constructor(
     override fun getRequestUrl(url: String, requestError: (String) -> Unit) {
         dataApi.getListRequestUrl(
             url,
-            object : RetrofitApiStarWars.CallBackRetrofit<CharactersListResponsePojo> {
+            object : ApiService.CallBackRetrofit<CharactersListResponsePojo> {
 
                 override fun success(pogo: CharactersListResponsePojo) {
                     insertDatabaseCharacters(pogo)

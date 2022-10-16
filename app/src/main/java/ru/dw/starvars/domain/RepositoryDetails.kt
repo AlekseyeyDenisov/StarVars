@@ -1,7 +1,7 @@
 package ru.dw.starvars.domain
 
 
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.data.database.entity.ValueAttrEntity
 
 interface RepositoryDetails {
 

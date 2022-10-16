@@ -1,10 +1,10 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database
 
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ru.dw.starvars.data.room.entity.CharactersDBModel
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.data.database.entity.CharactersDBModel
+import ru.dw.starvars.data.database.entity.ValueAttrEntity
 
 @Dao
 interface CharactersDao {

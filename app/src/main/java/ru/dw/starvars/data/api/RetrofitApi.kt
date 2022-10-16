@@ -1,9 +1,9 @@
-package ru.dw.starvars.data.retrofit
+package ru.dw.starvars.data.api
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
-import ru.dw.starvars.data.retrofit.model.PlanetsPojo
+import ru.dw.starvars.data.api.model.PlanetsPojo
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
 
 

@@ -1,11 +1,11 @@
-package ru.dw.starvars.data.room
+package ru.dw.starvars.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.dw.starvars.data.room.entity.CharactersDBModel
-import ru.dw.starvars.data.room.entity.ValueAttrEntity
+import ru.dw.starvars.data.database.entity.CharactersDBModel
+import ru.dw.starvars.data.database.entity.ValueAttrEntity
 
 
 @Database(
