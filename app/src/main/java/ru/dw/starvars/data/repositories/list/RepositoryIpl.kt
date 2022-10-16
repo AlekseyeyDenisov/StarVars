@@ -14,7 +14,7 @@ import ru.dw.starvars.domain.model.ResultsItem
 import ru.dw.starvars.utils.VIEW_TAPE_LOAD_MORE
 
 
-class RepositoryIpl : RepositoryList, DataBaseListLocal {
+class RepositoryIpl : RepositoryList {
     private val dataApi: ApiRetrofitListInterface = RetrofitApiStarWars
     private val mapper = DataMapper()
     private val db: DBRoom = MyApp.dbRoom

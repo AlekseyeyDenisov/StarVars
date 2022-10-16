@@ -4,8 +4,9 @@ import ru.dw.starvars.data.room.entity.CharactersDBModel
 import ru.dw.starvars.domain.model.CharacterItemView
 import ru.dw.starvars.domain.model.ResultsItem
 import ru.dw.starvars.utils.VIEW_TAPE_CHARACTER
+import javax.inject.Inject
 
-class DataMapper {
+class DataMapper @Inject constructor() {
     fun mapperPeoplesDBModelToPeoplesItemView(
         charactersDBModel: CharactersDBModel
     ): CharacterItemView {

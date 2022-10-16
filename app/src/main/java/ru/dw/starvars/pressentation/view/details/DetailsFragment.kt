@@ -14,7 +14,7 @@ import ru.dw.starvars.pressentation.view.details.details.DetailsViewModel
 
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw RuntimeException("FragmentDetailsBinding = null ")
 
 
     private val viewModel: DetailsViewModel by lazy {

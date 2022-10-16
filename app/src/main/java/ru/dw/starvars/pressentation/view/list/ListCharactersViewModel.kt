@@ -12,11 +12,13 @@ import ru.dw.starvars.domain.model.CharacterItemView
 
 
 class ListCharactersViewModel : ViewModel() {
-    private var liveData: MutableLiveData<ListState> = MutableLiveData()
     private val repository = RepositoryIpl()
+
     private val getChaptersListCase = GetListCharacterCase(repository)
     private val refreshChaptersListCase = RefreshListCharacterCase(repository)
     private val getAllCharacterCase = GetAllCharacterCase(repository)
+
+    private var liveData: MutableLiveData<ListState> = MutableLiveData()
 
     init {
         observeRoom()

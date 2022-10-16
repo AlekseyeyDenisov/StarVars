@@ -4,9 +4,15 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import ru.dw.starvars.data.room.DBRoom
+import ru.dw.starvars.di.DaggerApplicationComponent
 
 
 class MyApp : Application() {
+
+    val component by lazy {
+        DaggerApplicationComponent.factory()
+            .create(this)
+    }
 
     companion object {
         var appContext:Context? = null
@@ -16,13 +22,12 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appContext = applicationContext
-        initDBRoom()
+        initDBRoom(applicationContext)
 
     }
 
-    private fun initDBRoom() {
-        _dbRoom = Room.databaseBuilder(appContext!!, DBRoom::class.java, "db_star_wars").build()
+    private fun initDBRoom(context: Context) {
+        _dbRoom = Room.databaseBuilder(context, DBRoom::class.java, "db_star_wars").build()
     }
 
 
