@@ -2,9 +2,8 @@
 Архетектура MVVM<br>
 Retrofit<br>
 Room<br>
-Dagger<br>
 Coroutines<br>
-Dagger<br>
+Dagger<br><br>
 ![Screenshot_20220728_111644](https://user-images.githubusercontent.com/92829426/181457510-e575d465-bbe4-4d60-b34e-33ef1fccfcf5.jpg)
 
 
