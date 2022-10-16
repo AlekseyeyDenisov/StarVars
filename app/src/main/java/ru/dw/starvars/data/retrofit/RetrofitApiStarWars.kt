@@ -7,12 +7,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
 import ru.dw.starvars.domain.model.CharactersListResponsePojo
+import javax.inject.Inject
 
 
-
-object RetrofitApiStarWars : ApiRetrofitListInterface {
+class RetrofitApiStarWars @Inject constructor() : ApiRetrofitListInterface {
     private val retrofit: RetrofitApi = initRetrofit()
-    private const val BASE_URL = "https://swapi.dev/api/"
+    companion object {
+        private const val BASE_URL = "https://swapi.dev/api/"
+    }
+
 
     private fun initRetrofit(): RetrofitApi {
         return Retrofit.Builder().apply {

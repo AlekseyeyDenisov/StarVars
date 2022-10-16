@@ -1,21 +1,40 @@
 package ru.dw.starvars.di
 
 
-import androidx.room.RoomDatabase
+import android.app.Application
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
+import ru.dw.starvars.data.repositories.details.RepositoryDetailsIpl
 import ru.dw.starvars.data.repositories.list.ApiRetrofitListInterface
+import ru.dw.starvars.data.repositories.list.RepositoryListIpl
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
-import ru.dw.starvars.data.room.DBRoom
+import ru.dw.starvars.data.room.AppDataBase
+import ru.dw.starvars.data.room.CharactersDao
+import ru.dw.starvars.domain.RepositoryDetails
+import ru.dw.starvars.domain.RepositoryList
 
 @Module
 interface DataModule {
 
-    @ApplicationScopeSingleton
     @Binds
-    fun bindLocalDataSource(impl: DBRoom): RoomDatabase
+    fun bindRepositoryList(impl: RepositoryListIpl): RepositoryList
 
-    @ApplicationScopeSingleton
     @Binds
-    fun bindRemoteSource(impl: RetrofitApiStarWars): ApiRetrofitListInterface
+    fun bindRepositoryDetails(impl: RepositoryDetailsIpl): RepositoryDetails
+
+
+    @Binds
+    fun ApiRetrofitListInterface(impl: RetrofitApiStarWars): ApiRetrofitListInterface
+
+    companion object {
+        @Provides
+        fun provideCharactersDao(
+            application: Application
+        ): AppDataBase {
+            return AppDataBase.getInstance(application)
+        }
+    }
+
+
 }

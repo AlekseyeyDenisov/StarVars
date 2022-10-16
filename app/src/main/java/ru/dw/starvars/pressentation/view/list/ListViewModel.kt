@@ -4,19 +4,19 @@ package ru.dw.starvars.pressentation.view.list
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.dw.starvars.data.repositories.list.RepositoryIpl
-import ru.dw.starvars.domain.cases.GetAllCharacterCase
-import ru.dw.starvars.domain.cases.GetListCharacterCase
-import ru.dw.starvars.domain.cases.RefreshListCharacterCase
 import ru.dw.starvars.domain.model.CharacterItemView
+import ru.dw.starvars.domain.usecases.GetAllCharacterCase
+import ru.dw.starvars.domain.usecases.GetListCharacterCase
+import ru.dw.starvars.domain.usecases.RefreshListCharacterCase
+import javax.inject.Inject
 
 
-class ListCharactersViewModel : ViewModel() {
-    private val repository = RepositoryIpl()
+class ListViewModel @Inject constructor(
+    private val getChaptersListCase: GetListCharacterCase,
+    private val refreshChaptersListCase: RefreshListCharacterCase,
+    private val getAllCharacterCase: GetAllCharacterCase
+) : ViewModel() {
 
-    private val getChaptersListCase = GetListCharacterCase(repository)
-    private val refreshChaptersListCase = RefreshListCharacterCase(repository)
-    private val getAllCharacterCase = GetAllCharacterCase(repository)
 
     private var liveData: MutableLiveData<ListState> = MutableLiveData()
 
@@ -27,7 +27,7 @@ class ListCharactersViewModel : ViewModel() {
     fun getLivedata(): LiveData<ListState> = liveData
 
     fun refresh() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             refreshChaptersListCase.invoke()
         }
     }
