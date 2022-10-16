@@ -1,5 +1,6 @@
 Программа получает по API список записывает в базу и выводит на экран <br>
 Архетектура MVVM<br>
+Single Activity<br>
 Retrofit<br>
 Room<br>
 Coroutines<br>
