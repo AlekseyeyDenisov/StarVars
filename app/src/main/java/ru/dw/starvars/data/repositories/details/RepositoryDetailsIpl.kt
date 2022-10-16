@@ -1,23 +1,27 @@
 package ru.dw.starvars.data.repositories.details
 
 
-import ru.dw.starvars.MyApp
 import ru.dw.starvars.data.retrofit.RetrofitApiStarWars
 import ru.dw.starvars.data.retrofit.model.PlanetsPojo
-import ru.dw.starvars.data.room.DBRoom
+import ru.dw.starvars.data.room.AppDataBase
 import ru.dw.starvars.data.room.entity.ValueAttrEntity
 import ru.dw.starvars.domain.RepositoryDetails
 import ru.dw.starvars.pressentation.view.details.DetailsFragment.Companion.CONSTANT_ATTRIBUTE_HOME_WORLD
+import javax.inject.Inject
 
 
-class RepositoryDetailsIpl : RepositoryDetails {
-    private val dataApi = RetrofitApiStarWars
-    private val db: DBRoom = MyApp.dbRoom
+class RepositoryDetailsIpl @Inject constructor(
+    private val dbDao: AppDataBase,
+    private val dataApi : RetrofitApiStarWars
+) : RepositoryDetails {
 
-    override fun getAllValueAttr(): List<ValueAttrEntity> = db.valueDao().getAll()
+
+
+
+    override fun getAllValueAttr(): List<ValueAttrEntity> = dbDao.valueDao().getAll()
 
     override fun getValueAttr(url: String): ValueAttrEntity {
-        return db.valueDao().getValueAttr(url)
+        return dbDao.valueDao().getValueAttr(url)
     }
 
     override fun getRequestUrl(url: String, attr: String, name: (String) -> Unit) {
@@ -28,7 +32,7 @@ class RepositoryDetailsIpl : RepositoryDetails {
 
 
     private fun insertValueAttr(valueAttributesEntity: ValueAttrEntity) {
-        db.valueDao().insert(valueAttributesEntity)
+        dbDao.valueDao().insert(valueAttributesEntity)
     }
 
     private fun getIpiPlanet(url: String, name: (String) -> Unit) {
@@ -51,7 +55,6 @@ class RepositoryDetailsIpl : RepositoryDetails {
                 }
             })
     }
-
 
 
 }

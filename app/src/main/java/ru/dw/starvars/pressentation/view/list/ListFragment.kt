@@ -1,6 +1,7 @@
 package ru.dw.starvars.pressentation.view.list
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -12,20 +13,23 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.dw.starvars.R
+import ru.dw.starvars.StartWarsApp
 import ru.dw.starvars.data.SharedPreferencesManager
 import ru.dw.starvars.databinding.FragmentListPeoplsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
+import ru.dw.starvars.pressentation.ViewModelFactory
 import ru.dw.starvars.pressentation.view.details.DetailsFragment
 import ru.dw.starvars.pressentation.view.list.recycler.AdapterRecyclerListCharacters
 import ru.dw.starvars.pressentation.view.list.recycler.OnItemClickListener
 import ru.dw.starvars.utils.NetworkUtil
+import javax.inject.Inject
 
-class ListCharactersFragment : Fragment(), OnItemClickListener {
+class ListFragment : Fragment(), OnItemClickListener {
     private lateinit var pref: SharedPreferencesManager
 
     companion object {
-        fun newInstance() = ListCharactersFragment()
-       private const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
+        fun newInstance() = ListFragment()
+        private const val START_CHAPTERS_LIST_URL = "https://swapi.dev/api/people/"
 
     }
 
@@ -33,12 +37,21 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
     private val binding get() = _binding!!
     private var listRecycler: List<CharacterItemView> = ArrayList()
 
-    private val viewModel: ListCharactersViewModel by lazy {
-        ViewModelProvider(this)[ListCharactersViewModel::class.java]
+    private lateinit var viewModel: ListViewModel
+
+    private val component by lazy {
+        (requireActivity().application as StartWarsApp).component
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val adapterRecyclerListCharacters = AdapterRecyclerListCharacters(this)
 
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +66,9 @@ class ListCharactersFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ListViewModel::class.java]
+
+
         initRecycler(binding.listChapterRecyclerView)
         firstStart()
         initObserve()

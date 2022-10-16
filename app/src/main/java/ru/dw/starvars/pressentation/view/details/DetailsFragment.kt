@@ -1,27 +1,37 @@
 package ru.dw.starvars.pressentation.view.details
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.dw.starvars.StartWarsApp
 import ru.dw.starvars.databinding.FragmentDetailsBinding
 import ru.dw.starvars.domain.model.CharacterItemView
-import ru.dw.starvars.pressentation.view.details.details.DetailsViewModel
+import ru.dw.starvars.pressentation.ViewModelFactory
+import javax.inject.Inject
 
-//test git
+
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw RuntimeException("FragmentDetailsBinding = null ")
 
 
-    private val viewModel: DetailsViewModel by lazy {
-        ViewModelProvider(this)[DetailsViewModel::class.java]
+    private lateinit var viewModel: DetailsViewModel
+
+    private val component by lazy {
+        (requireActivity().application as StartWarsApp).component
     }
 
-
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +44,9 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailsViewModel::class.java]
+
         val characterItemView = arguments?.getParcelable<CharacterItemView>(BUNDLE_DETAILS)
         render(characterItemView)
 
@@ -43,7 +56,7 @@ class DetailsFragment : Fragment() {
         initViewDataBundle(characterItemView)
 
         characterItemView?.homeWorld?.let { it ->
-            viewModel.getNameAttr(it, CONSTANT_ATTRIBUTE_HOME_WORLD){ name->
+            viewModel.getNameAttr(it, CONSTANT_ATTRIBUTE_HOME_WORLD) { name ->
                 binding.homeWorld.text = name
             }
         }
