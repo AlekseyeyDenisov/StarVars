@@ -42,6 +42,8 @@ class ListFragment : Fragment(), OnItemClickListener {
     private val component by lazy {
         (requireActivity().application as StartWarsApp).component
     }
+    @Inject
+    lateinit var networkUtil: NetworkUtil
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -209,7 +211,7 @@ class ListFragment : Fragment(), OnItemClickListener {
 
 
     private fun isConnectInternet(): Boolean {
-        return NetworkUtil.getConnectivityStatusString(requireContext())
+        return networkUtil.getConnectivityStatusString()
     }
 
     override fun onDestroy() {
